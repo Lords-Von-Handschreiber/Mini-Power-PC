@@ -16,9 +16,18 @@ namespace Compiler
     {
         private const string FORM_TITLE = "Mini-Power-PC - Editor/Compiler - ";
 
-        public Form1()
+        public Form1(string[] args)
         {
             InitializeComponent();
+            if (args.Length > 0)
+            {
+                FileTracker.ActiveFile = new FileInfo(args[0]);
+                richTextBox.Text = FileTracker.OpenFile(FileTracker.ActiveFile);
+                FileTracker.IsSaved = true;
+                saveToolStripMenuItem.Enabled = false;
+                updateFormText();
+            }
+
             updateFormText();
         }
 
