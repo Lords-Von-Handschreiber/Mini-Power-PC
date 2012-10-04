@@ -63,14 +63,6 @@ namespace Compiler.Util
         {
             using (var w = new System.IO.BinaryWriter(file.OpenWrite()))
             {
-                //foreach (var command in Commands)
-                //{
-                //    var ba = new byte[2];
-                //    FromShort(command.Value, out ba[1], out ba[0]);
-                //    Console.WriteLine(command.Key + "\t" + BitConverter.ToString(ba));
-
-                //    w.Write(BitConverter.ToInt16(ba, 0));
-                //}
                 foreach (var line in content.Trim().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.None))
                 {
                     if (!string.IsNullOrEmpty(line.Trim()))
@@ -89,7 +81,6 @@ namespace Compiler.Util
                                 cmd += short.Parse(arg);
                             }
                         }
-                        //Console.WriteLine(cmd + " --> " + cmdString + " with " + args);
                         w.Write(cmd);
                     }
                 }
