@@ -1,2 +1,1 @@
-Docu will be here:
-http://lords-von-handschreiber.github.com/edu-zhaw-inf-Mini-Power-PC/
+# [Mini-Power-PC](http://lords-von-handschreiber.github.com/edu-zhaw-inf-Mini-Power-PC/)
