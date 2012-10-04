@@ -77,11 +77,20 @@ namespace Compiler.Util
                     {
                         var l = line.Trim().Split(' ');
                         var cmdString = l[0].Trim();
+                        var args = line.Replace(cmdString, "").Replace(" ", "").Trim(); ;
 
                         var cmd = Commands[cmdString];
-                        cmd += (byte)(2);
+                        if (!string.IsNullOrEmpty(args))
+                        {
+                            foreach (var a in args.Split(','))
+                            {
+                                var arg = a.Replace("#", "").Trim();
+
+                                cmd += short.Parse(arg);
+                            }
+                        }
+                        //Console.WriteLine(cmd + " --> " + cmdString + " with " + args);
                         w.Write(cmd);
-                        Console.WriteLine(line);
                     }
                 }
             }
