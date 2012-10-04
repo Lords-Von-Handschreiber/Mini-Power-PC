@@ -28,9 +28,13 @@ namespace Emulator
                     content = br.ReadBytes((int)file.Length);
                 }
 
+                //cpu.Memory.Write(content, 0, content.Length - 1);
+
                 for (var i = 0; i < content.Length; i += 2)
                 {
-                    textBox1.Text += Command.ToShort(content[i], content[i+1]).ToString() + Environment.NewLine;
+                    byte[] asdf = new byte[2];
+                    //cpu.Memory.Read(asdf, i, 2);
+                    textBox1.Text += Command.ToShort(content[i], content[i + 1]).ToString() + Environment.NewLine;
                 }
             }
         }
