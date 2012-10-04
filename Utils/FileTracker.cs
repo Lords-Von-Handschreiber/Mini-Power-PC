@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Compiler.Util
+namespace Utils
 {
     public static class FileTracker
     {

@@ -1,5 +1,4 @@
-﻿using Compiler.Util;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utils;
 
 namespace Compiler
 {
@@ -97,7 +97,7 @@ namespace Compiler
         private void saveCombiledFileDialog_FileOk(object sender, CancelEventArgs e)
         {
             FileTracker.SaveFile(richTextBox.Text);
-            Util.Compiler.Compile(richTextBox.Text, new FileInfo(saveCompiledFileDialog.FileName));
+            Utils.Compiler.Compile(richTextBox.Text, new FileInfo(saveCompiledFileDialog.FileName));
         }
     }
 }

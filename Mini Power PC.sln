@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compiler", ".\Compiler\Compiler.csproj", "{FA50064C-B8A8-47D3-B6FA-B6296ECED7ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compiler", "Compiler\Compiler.csproj", "{FA50064C-B8A8-47D3-B6FA-B6296ECED7ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emulator", ".\Emulator\Emulator.csproj", "{A038C84B-631C-42A7-A11B-19225CECFE18}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emulator", "Emulator\Emulator.csproj", "{A038C84B-631C-42A7-A11B-19225CECFE18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{99817A4D-F7DA-4D6C-9034-468F33B3D459}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +21,10 @@ Global
 		{A038C84B-631C-42A7-A11B-19225CECFE18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A038C84B-631C-42A7-A11B-19225CECFE18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A038C84B-631C-42A7-A11B-19225CECFE18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99817A4D-F7DA-4D6C-9034-468F33B3D459}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99817A4D-F7DA-4D6C-9034-468F33B3D459}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99817A4D-F7DA-4D6C-9034-468F33B3D459}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99817A4D-F7DA-4D6C-9034-468F33B3D459}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
