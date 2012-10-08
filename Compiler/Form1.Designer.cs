@@ -40,7 +40,7 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.saveCompiledFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.richTextBox = new Compiler.Util.NumberedTextBox();
+            this.richTextBox = new System.Windows.Forms.RichTextBox();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -140,11 +140,10 @@
             // richTextBox
             // 
             this.richTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox.Font = new System.Drawing.Font("Lucida Console", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox.Location = new System.Drawing.Point(0, 28);
             this.richTextBox.Name = "richTextBox";
             this.richTextBox.Size = new System.Drawing.Size(969, 524);
-            this.richTextBox.TabIndex = 0;
+            this.richTextBox.TabIndex = 1;
             this.richTextBox.Text = "";
             this.richTextBox.TextChanged += new System.EventHandler(this.richTextBox_TextChanged);
             // 
@@ -180,7 +179,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.ToolStripMenuItem saveasToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveCompiledFileDialog;
-        private Util.NumberedTextBox richTextBox;
+        private System.Windows.Forms.RichTextBox richTextBox;
     }
 }
 

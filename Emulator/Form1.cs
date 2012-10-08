@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Emulator.Util;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,26 +16,30 @@ namespace Emulator
     public partial class Form1 : Form
     {
         private Cpu cpu;
+
         public Form1(string[] args)
         {
             InitializeComponent();
+
             cpu = new Cpu();
             if (args.Length > 0)
             {
                 var file = new FileInfo(args[0]);
-                byte[] content;
                 using (var br = new BinaryReader(file.OpenRead()))
                 {
-                    content = br.ReadBytes((int)file.Length);
+                    cpu.Memory = br.ReadBytes((int)file.Length);
                 }
 
-                //cpu.Memory.Write(content, 0, content.Length - 1);
-
-                for (var i = 0; i < content.Length; i += 2)
+                for (var i = 0; i < cpu.Memory.Length; i += Cpu.WORD_LENGTH)
                 {
-                    byte[] asdf = new byte[2];
-                    //cpu.Memory.Read(asdf, i, 2);
-                    textBox1.Text += Command.ToShort(content[i], content[i + 1]).ToString() + Environment.NewLine;
+                    byte[] asdf = new byte[Cpu.WORD_LENGTH];
+                    for (int x = 0; x < Cpu.WORD_LENGTH; x++)
+                    {
+                        asdf[x] = cpu.Memory[i + x];
+                    }
+
+                    var s = Command.ToShort(asdf);
+                    textBox1.Text += s.ToString() + " = " + Command.Find(s).ToString() + Environment.NewLine;
                 }
             }
         }

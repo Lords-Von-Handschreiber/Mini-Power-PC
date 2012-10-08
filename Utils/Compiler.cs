@@ -21,16 +21,22 @@ namespace Utils
                         var cmdString = l[0].Trim();
                         var args = line.Replace(cmdString, "").Replace(" ", "").Trim(); ;
 
-                        var cmd = Command.Find(cmdString);
+                        var cmd = Command.Commands[cmdString];
+                        Console.WriteLine(cmd + " = " + cmdString);
                         if (!string.IsNullOrEmpty(args))
                         {
                             foreach (var a in args.Split(','))
                             {
                                 var arg = a.Replace("#", "").Trim();
-
-                                cmd += short.Parse(arg);
+                                short s = Command.ToShort(cmd);
+                                cmd = Command.FromShort(s += short.TryParse(arg, out s) ? s : (short)0);
+                                Console.WriteLine(cmd);
+                                //cmd += short.TryParse(arg, out s) ? s : (short)0;
                             }
                         }
+                        //var buffer = new byte[2];
+                        //Command.FromShort(cmd, out buffer[0], out buffer[1]);
+                        //w.Write(buffer);
                         w.Write(cmd);
                     }
                 }
