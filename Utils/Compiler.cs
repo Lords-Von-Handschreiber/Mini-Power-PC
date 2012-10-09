@@ -11,6 +11,9 @@ namespace Utils
     {
         public static void Compile(string content, FileInfo file)
         {
+            if (file.Exists)
+                file.Delete();
+
             using (var w = new System.IO.BinaryWriter(file.OpenWrite()))
             {
                 foreach (var line in content.Trim().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.None))
@@ -21,22 +24,17 @@ namespace Utils
                         var cmdString = l[0].Trim();
                         var args = line.Replace(cmdString, "").Replace(" ", "").Trim(); ;
 
-                        var cmd = Command.Commands[cmdString];
-                        Console.WriteLine(cmd + " = " + cmdString);
+                        var cmd = Command.FromShort((short)Enum.Parse(typeof(Command.Cmds), cmdString));
                         if (!string.IsNullOrEmpty(args))
                         {
                             foreach (var a in args.Split(','))
                             {
-                                var arg = a.Replace("#", "").Trim();
-                                short s = Command.ToShort(cmd);
-                                cmd = Command.FromShort(s += short.TryParse(arg, out s) ? s : (short)0);
-                                Console.WriteLine(cmd);
-                                //cmd += short.TryParse(arg, out s) ? s : (short)0;
+                                var arg = short.Parse(a.Replace("#", "").Trim());
+                                var s = (short)(Command.ToShort(cmd) + arg);
+                                cmd = Command.FromShort(s);
                             }
                         }
-                        //var buffer = new byte[2];
-                        //Command.FromShort(cmd, out buffer[0], out buffer[1]);
-                        //w.Write(buffer);
+                        //Console.WriteLine(cmd[1] + "-" + cmd[0] + " = " + cmdString + " " + args + "(" + Command.ToShort(cmd) + ")");
                         w.Write(cmd);
                     }
                 }
