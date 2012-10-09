@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Emulator.Util
+namespace Utils
 {
     public partial class Cpu
     {
@@ -35,15 +35,100 @@ namespace Emulator.Util
             SWDD = 24576
         }
 
-        public static Cmds Find(short command)
+        private Cmds find()
         {
-            Cmds retCmd = 0;
-            foreach (short cmd in Enum.GetValues(typeof(Cmds)))
+            var currentCommand = ToShort(CommandRegister);
+            if (currentCommand == 0)
+                return Cmds.END;
+
+            if (currentCommand < 0)
+                return Cmds.ADDD;
+            // 62336 = 11110011 10000000
+            if ((currentCommand & 62336) == (short)Cmds.CLR)
+                return Cmds.CLR;
+            if ((currentCommand & 62336) == (short)Cmds.ADD)
+                return Cmds.ADD;
+            if ((currentCommand & 62336) == (short)Cmds.AND)
+                return Cmds.AND;
+            if ((currentCommand & 62336) == (short)Cmds.OR)
+                return Cmds.OR;
+
+            // 65280 = 11111111 00000000
+            if ((currentCommand & 65280) == (short)Cmds.INC)
+                return Cmds.INC;
+            if ((currentCommand & 65280) == (short)Cmds.DEC)
+                return Cmds.DEC;
+            if ((currentCommand & 65280) == (short)Cmds.SRA)
+                return Cmds.SRA;
+            if ((currentCommand & 65280) == (short)Cmds.SLA)
+                return Cmds.SLA;
+            if ((currentCommand & 65280) == (short)Cmds.SRL)
+                return Cmds.SRL;
+            if ((currentCommand & 65280) == (short)Cmds.SLL)
+                return Cmds.SLL;
+
+            // 65408 = 11111111 10000000
+            if ((currentCommand & 65280) == (short)Cmds.NOT)
+                return Cmds.NOT;
+
+            // 62208 = 11110011 00000000
+            if ((currentCommand & 65280) == (short)Cmds.BZ)
+                return Cmds.BZ;
+            if ((currentCommand & 65280) == (short)Cmds.BNZ)
+                return Cmds.BNZ;
+            if ((currentCommand & 65280) == (short)Cmds.BC)
+                return Cmds.BC;
+            if ((currentCommand & 65280) == (short)Cmds.B)
+                return Cmds.B;
+
+            // 63488 = 11111000 00000000
+            if ((currentCommand & 65280) == (short)Cmds.BZD)
+                return Cmds.BZD;
+            if ((currentCommand & 65280) == (short)Cmds.BNZD)
+                return Cmds.BNZD;
+            if ((currentCommand & 65280) == (short)Cmds.BCD)
+                return Cmds.BCD;
+            if ((currentCommand & 65280) == (short)Cmds.BD)
+                return Cmds.BD;
+
+            return Cmds.NOT;
+        }
+
+        private short findRegNr()
+        {
+            return (short)((ToShort(CommandRegister) & (3 << 10)) >> 10);
+        }
+
+        public void Execute()
+        {
+            Cmds cmd = find();
+            short regNr = 0;
+            switch (cmd)
             {
-                if ((command & cmd) == cmd)
-                    retCmd = (Cmds)cmd;
+                case Cmds.END:
+                    IsRunnung = false;
+                    break;
+                case Cmds.CLR:
+                    regNr = findRegNr();
+                    Register[regNr][0] = 0;
+                    Register[regNr][1] = 0;
+                    CarryFlag = false;
+                    break;
+                case Cmds.ADD:
+                    regNr = findRegNr();
+                    Register[0] = FromShort((short)(ToShort(Register[0]) + ToShort(Register[regNr])));
+                    // TODO: carryflag korrekt setzen
+                    CarryFlag = false;
+                    break;
             }
-            return retCmd;
+
+            CommandCounter = FromShort((short)(ToShort(CommandCounter) + 2));
+            StepCounter++;
+        }
+
+        public void Fetch()
+        {
+            CommandRegister = FromMemory((int)ToShort(CommandCounter), Cpu.WORD_LENGTH);
         }
 
         public static short ToShort(byte[] bytes)
@@ -54,10 +139,6 @@ namespace Emulator.Util
         public static byte[] FromShort(short number)
         {
             return new[] { (byte)(number & 255), (byte)(number >> 8) }; //TODO: or other way round...
-        }
-
-        public static void Execute()
-        {
         }
     }
 }
