@@ -1,6 +1,5 @@
 ﻿
-using Utils;
-namespace Emulator.Util
+namespace Utils
 {
     public partial class Cpu
     {
@@ -12,13 +11,18 @@ namespace Emulator.Util
         public byte[] CommandRegister { get; set; } //aktueller befehl
         public byte[] CommandCounter { get; set; }
 
-        protected byte[] Memory { get; set; }
-
+        public byte[] Memory { get; set; }
         public bool CarryFlag { get; set; }
+
+        public double StepCounter = 0;
+
+        public bool IsRunnung { get; set; }
 
         public Cpu()
         {
             CommandCounter = FromShort(100);
+
+            IsRunnung = false;
 
             Register = new byte[4][];
             Register[0] = new byte[2];
@@ -48,7 +52,7 @@ namespace Emulator.Util
 
         public byte[] FromMemory(int offset, int count)
         {
-            byte[] retVal = new byte[count + 1];
+            byte[] retVal = new byte[count];
             for (int i = 0; i < count; i++)
             {
                 retVal[i] = Memory[offset + i];
