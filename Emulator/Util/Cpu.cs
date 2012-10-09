@@ -5,7 +5,7 @@ namespace Emulator.Util
     public class Cpu
     {
         public const int WORD_LENGTH = 2;
-        public const int MEMORY_SIZE = 2 ^ 10;
+        public readonly int MEMORY_SIZE = (int)System.Math.Pow(2, 10); // 2 ^ 10;
 
         // Accumulator = 0, R1, R2, R3
         public byte[][] Register { get; set; }
@@ -38,12 +38,12 @@ namespace Emulator.Util
                 Memory[offset + i] = data[i];
             }
         }
-        
+
         public byte[] FromMemory(int offset)
         {
             return FromMemory(offset, Memory.Length - offset);
         }
-        
+
         public byte[] FromMemory(int offset, int count)
         {
             byte[] retVal = new byte[count + 1];
