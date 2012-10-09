@@ -30,7 +30,16 @@ namespace Utils
                         {
                             foreach (var a in args.Split(','))
                             {
-                                var arg = short.Parse(a.Replace("#", "").Trim());
+                                short arg = 0;
+                                if (!a.StartsWith("#"))
+                                {
+                                    arg = (short)(short.Parse(a.Trim()) << 10);
+                                }
+                                else
+                                {
+                                    arg = short.Parse(a.Replace("#", "").Trim());
+                                }
+                                //var arg = short.Parse(a.Replace("#", "").Trim());
                                 var s = (short)(Cpu.ToShort(cmd) + arg);
                                 cmd = Cpu.FromShort(s);
                             }

@@ -5,7 +5,7 @@ namespace Emulator.Util
     public partial class Cpu
     {
         public const int WORD_LENGTH = 2;
-        public readonly int MEMORY_SIZE = (int)System.Math.Pow(2, 10); // 2 ^ 10;
+        public readonly int MEMORY_SIZE = (int)System.Math.Pow(2, 10); // 2^10
 
         // Accumulator = 0, R1, R2, R3
         public byte[][] Register { get; set; }
@@ -25,6 +25,8 @@ namespace Emulator.Util
             Register[1] = new byte[2];
             Register[2] = new byte[2];
             Register[3] = new byte[2];
+
+            CommandRegister = new byte[2];
 
             Memory = new byte[MEMORY_SIZE];
 
