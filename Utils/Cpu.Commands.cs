@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Utils
+namespace Emulator.Util
 {
-    public static class Command
+    public partial class Cpu
     {
         public enum Cmds : short
         {
@@ -33,10 +33,6 @@ namespace Utils
             BCD = 14336,
             LWDD = 16384,
             SWDD = 24576
-}
-
-        public static void Execute()
-        {
         }
 
         public static Cmds Find(short command)
@@ -58,6 +54,10 @@ namespace Utils
         public static byte[] FromShort(short number)
         {
             return new[] { (byte)(number & 255), (byte)(number >> 8) }; //TODO: or other way round...
+        }
+
+        public static void Execute()
+        {
         }
     }
 }

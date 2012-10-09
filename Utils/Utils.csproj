@@ -39,8 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command.cs" />
     <Compile Include="Compiler.cs" />
+    <Compile Include="Cpu.Commands.cs" />
+    <Compile Include="Cpu.cs" />
     <Compile Include="FileTracker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

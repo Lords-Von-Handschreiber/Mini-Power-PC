@@ -2,14 +2,14 @@
 using Utils;
 namespace Emulator.Util
 {
-    public class Cpu
+    public partial class Cpu
     {
         public const int WORD_LENGTH = 2;
         public readonly int MEMORY_SIZE = (int)System.Math.Pow(2, 10); // 2 ^ 10;
 
         // Accumulator = 0, R1, R2, R3
         public byte[][] Register { get; set; }
-        public byte[] CommandRegister { get; set; }
+        public byte[] CommandRegister { get; set; } //aktueller befehl
         public byte[] CommandCounter { get; set; }
 
         protected byte[] Memory { get; set; }
@@ -18,7 +18,7 @@ namespace Emulator.Util
 
         public Cpu()
         {
-            CommandCounter = Command.FromShort(100);
+            CommandCounter = FromShort(100);
 
             Register = new byte[4][];
             Register[0] = new byte[2];

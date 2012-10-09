@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Emulator.Util;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,14 +25,14 @@ namespace Utils
                         var cmdString = l[0].Trim();
                         var args = line.Replace(cmdString, "").Replace(" ", "").Trim(); ;
 
-                        var cmd = Command.FromShort((short)Enum.Parse(typeof(Command.Cmds), cmdString));
+                        var cmd = Cpu.FromShort((short)Enum.Parse(typeof(Cpu.Cmds), cmdString));
                         if (!string.IsNullOrEmpty(args))
                         {
                             foreach (var a in args.Split(','))
                             {
                                 var arg = short.Parse(a.Replace("#", "").Trim());
-                                var s = (short)(Command.ToShort(cmd) + arg);
-                                cmd = Command.FromShort(s);
+                                var s = (short)(Cpu.ToShort(cmd) + arg);
+                                cmd = Cpu.FromShort(s);
                             }
                         }
                         //Console.WriteLine(cmd[1] + "-" + cmd[0] + " = " + cmdString + " " + args + "(" + Command.ToShort(cmd) + ")");
