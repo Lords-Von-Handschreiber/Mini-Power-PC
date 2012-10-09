@@ -1,13 +1,5 @@
-﻿using Emulator.Util;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utils;
 
@@ -36,17 +28,16 @@ namespace Emulator
                 }
                 cpu.ToMemory(content, 100);
 
-                //for (var i = 0; i < content.Length; i += Cpu.WORD_LENGTH)
-                //{
-                //    byte[] asdf = new byte[Cpu.WORD_LENGTH];
-                //    for (int x = 0; x < Cpu.WORD_LENGTH; x++)
-                //    {
-                //        asdf[x] = cpu.Memory[i + x];
-                //    }
-
-                //    var s = Command.ToShort(asdf);
-                //    textBox1.Text += s.ToString() + " = " + Command.Find(s).ToString() + Environment.NewLine;
-                //}
+                cpu.IsRunnung = true;
+                var sw = new System.Diagnostics.Stopwatch();
+                sw.Start();
+                while (cpu.IsRunnung)
+                {
+                    cpu.Fetch();
+                    cpu.Execute();
+                }
+                sw.Stop();
+                Console.WriteLine("Time elapsed: " + sw.ElapsedMilliseconds + " ms");
             }
         }
     }
