@@ -35,9 +35,10 @@
             this.listBoxReg3 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxRegCommand = new System.Windows.Forms.ListBox();
-            this.listBox6 = new System.Windows.Forms.ListBox();
+            this.listBoxMemoryStack = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.checkBoxCarry = new System.Windows.Forms.CheckBox();
+            this.listBoxCommandCounter = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // listBoxCommandStack
@@ -59,7 +60,7 @@
             "Akkumulator"});
             this.listBoxReg0.Location = new System.Drawing.Point(216, 29);
             this.listBoxReg0.Name = "listBoxReg0";
-            this.listBoxReg0.Size = new System.Drawing.Size(120, 36);
+            this.listBoxReg0.Size = new System.Drawing.Size(198, 36);
             this.listBoxReg0.TabIndex = 1;
             // 
             // listBoxReg1
@@ -71,7 +72,7 @@
             "Register 1"});
             this.listBoxReg1.Location = new System.Drawing.Point(216, 71);
             this.listBoxReg1.Name = "listBoxReg1";
-            this.listBoxReg1.Size = new System.Drawing.Size(120, 36);
+            this.listBoxReg1.Size = new System.Drawing.Size(198, 36);
             this.listBoxReg1.TabIndex = 2;
             // 
             // listBoxReg2
@@ -83,7 +84,7 @@
             "Register 2"});
             this.listBoxReg2.Location = new System.Drawing.Point(216, 113);
             this.listBoxReg2.Name = "listBoxReg2";
-            this.listBoxReg2.Size = new System.Drawing.Size(120, 36);
+            this.listBoxReg2.Size = new System.Drawing.Size(198, 36);
             this.listBoxReg2.TabIndex = 3;
             // 
             // listBoxReg3
@@ -95,7 +96,7 @@
             "Register 3"});
             this.listBoxReg3.Location = new System.Drawing.Point(216, 155);
             this.listBoxReg3.Name = "listBoxReg3";
-            this.listBoxReg3.Size = new System.Drawing.Size(120, 36);
+            this.listBoxReg3.Size = new System.Drawing.Size(198, 36);
             this.listBoxReg3.TabIndex = 4;
             // 
             // label1
@@ -116,23 +117,23 @@
             "Befehlsregister"});
             this.listBoxRegCommand.Location = new System.Drawing.Point(216, 197);
             this.listBoxRegCommand.Name = "listBoxRegCommand";
-            this.listBoxRegCommand.Size = new System.Drawing.Size(120, 36);
+            this.listBoxRegCommand.Size = new System.Drawing.Size(198, 36);
             this.listBoxRegCommand.TabIndex = 6;
             // 
-            // listBox6
+            // listBoxMemoryStack
             // 
-            this.listBox6.Enabled = false;
-            this.listBox6.FormattingEnabled = true;
-            this.listBox6.ItemHeight = 16;
-            this.listBox6.Location = new System.Drawing.Point(342, 29);
-            this.listBox6.Name = "listBox6";
-            this.listBox6.Size = new System.Drawing.Size(198, 244);
-            this.listBox6.TabIndex = 7;
+            this.listBoxMemoryStack.Enabled = false;
+            this.listBoxMemoryStack.FormattingEnabled = true;
+            this.listBoxMemoryStack.ItemHeight = 16;
+            this.listBoxMemoryStack.Location = new System.Drawing.Point(420, 29);
+            this.listBoxMemoryStack.Name = "listBoxMemoryStack";
+            this.listBoxMemoryStack.Size = new System.Drawing.Size(198, 244);
+            this.listBoxMemoryStack.TabIndex = 7;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(339, 9);
+            this.label2.Location = new System.Drawing.Point(420, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(168, 17);
             this.label2.TabIndex = 8;
@@ -142,12 +143,24 @@
             // 
             this.checkBoxCarry.AutoSize = true;
             this.checkBoxCarry.Enabled = false;
-            this.checkBoxCarry.Location = new System.Drawing.Point(216, 239);
+            this.checkBoxCarry.Location = new System.Drawing.Point(216, 281);
             this.checkBoxCarry.Name = "checkBoxCarry";
             this.checkBoxCarry.Size = new System.Drawing.Size(96, 21);
             this.checkBoxCarry.TabIndex = 10;
             this.checkBoxCarry.Text = "Carry-Flag";
             this.checkBoxCarry.UseVisualStyleBackColor = true;
+            // 
+            // listBoxCommandCounter
+            // 
+            this.listBoxCommandCounter.Enabled = false;
+            this.listBoxCommandCounter.FormattingEnabled = true;
+            this.listBoxCommandCounter.ItemHeight = 16;
+            this.listBoxCommandCounter.Items.AddRange(new object[] {
+            "Befehlszähler"});
+            this.listBoxCommandCounter.Location = new System.Drawing.Point(216, 239);
+            this.listBoxCommandCounter.Name = "listBoxCommandCounter";
+            this.listBoxCommandCounter.Size = new System.Drawing.Size(198, 36);
+            this.listBoxCommandCounter.TabIndex = 11;
             // 
             // Form1
             // 
@@ -156,9 +169,10 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(872, 420);
+            this.Controls.Add(this.listBoxCommandCounter);
             this.Controls.Add(this.checkBoxCarry);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.listBox6);
+            this.Controls.Add(this.listBoxMemoryStack);
             this.Controls.Add(this.listBoxRegCommand);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBoxReg3);
@@ -183,9 +197,10 @@
         private System.Windows.Forms.ListBox listBoxReg3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listBoxRegCommand;
-        private System.Windows.Forms.ListBox listBox6;
+        private System.Windows.Forms.ListBox listBoxMemoryStack;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBoxCarry;
+        private System.Windows.Forms.ListBox listBoxCommandCounter;
 
     }
 }
