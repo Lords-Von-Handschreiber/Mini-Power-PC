@@ -37,7 +37,7 @@ namespace Emulator
                     {
                         updateGui(); // runs on UI thread
                     });
-                    System.Threading.Thread.Sleep(750);
+                    System.Threading.Thread.Sleep(1000);
 
                     while (cpu.IsRunnung)
                     {
@@ -54,7 +54,7 @@ namespace Emulator
                             updateGui(); // runs on UI thread
                         });
 
-                        System.Threading.Thread.Sleep(50);
+                        System.Threading.Thread.Sleep(500);
                     }
                 }));
 
@@ -65,9 +65,7 @@ namespace Emulator
         private void updateGui()
         {
             if (listBoxReg0.Items.Count != 2)
-            {
                 listBoxReg0.Items.Add(cpu.Register[0][0] + " " + cpu.Register[0][1]);
-            }
             else
                 listBoxReg0.Items[1] = cpu.Register[0][0] + " " + cpu.Register[0][1];
 
@@ -96,11 +94,11 @@ namespace Emulator
             else
                 listBoxCommandCounter.Items[1] = cpu.CommandCounter[0] + " " + cpu.CommandCounter[1];
 
-            checkBoxCarry.Checked = cpu.CarryFlag;
+            checkBoxCarry.Enabled = cpu.CarryFlag;
 
             listBoxCommandStack.Items.Clear();
             var cc = Cpu.ToShort(cpu.CommandCounter);
-            for (var i = (cc - 5 * 2); i <= (cc + 10 * 2); i += Cpu.WORD_LENGTH)
+            for (var i = (cc - 5 * Cpu.WORD_LENGTH); i <= (cc + 10 * Cpu.WORD_LENGTH); i += Cpu.WORD_LENGTH)
             {
                 listBoxCommandStack.Items.Add(i + ": " + cpu.FromMemory(i, 1)[0] + " " + cpu.FromMemory(i + 1, 1)[0]);
             }
@@ -114,4 +112,3 @@ namespace Emulator
         }
     }
 }
-

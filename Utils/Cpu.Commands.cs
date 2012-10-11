@@ -10,6 +10,7 @@ namespace Utils
     {
         public enum Cmds : short
         {
+            UNDEFINED = -1,
             ADDD = -32768,
             END = 0,
             NOT = 128,
@@ -53,6 +54,10 @@ namespace Utils
             if ((currentCommand & 62336) == (short)Cmds.OR)
                 return Cmds.OR;
 
+            // 65408 = 11111111 10000000
+            if ((currentCommand & 65280) == (short)Cmds.NOT)
+                return Cmds.NOT;
+
             // 65280 = 11111111 00000000
             if ((currentCommand & 65280) == (short)Cmds.INC)
                 return Cmds.INC;
@@ -66,10 +71,6 @@ namespace Utils
                 return Cmds.SRL;
             if ((currentCommand & 65280) == (short)Cmds.SLL)
                 return Cmds.SLL;
-
-            // 65408 = 11111111 10000000
-            if ((currentCommand & 65280) == (short)Cmds.NOT)
-                return Cmds.NOT;
 
             // 62208 = 11110011 00000000
             if ((currentCommand & 65280) == (short)Cmds.BZ)
@@ -91,7 +92,13 @@ namespace Utils
             if ((currentCommand & 65280) == (short)Cmds.BD)
                 return Cmds.BD;
 
-            return Cmds.NOT;
+            //57344 = 11100000 00000000
+            if ((currentCommand & 57344) == (short)Cmds.SWDD)
+                return Cmds.SWDD;
+            if ((currentCommand & 57344) == (short)Cmds.LWDD)
+                return Cmds.LWDD;
+
+            return Cmds.UNDEFINED;
         }
 
         private short findRegNr()
@@ -103,6 +110,7 @@ namespace Utils
         {
             Cmds cmd = find();
             short regNr = 0;
+            bool countUp = true;
             switch (cmd)
             {
                 case Cmds.END:
@@ -121,13 +129,106 @@ namespace Utils
                     CarryFlag = false;
                     break;
                 case Cmds.ADDD:
-                    short nr = (short)((short)cmd ^ (1 << 15));
-                    Register[0] = AddBytes(Register[0], FromShort(nr));
-                    //mask = 32767
+                    //mask = 32767 (01111111 11111111)
+                    Register[0] = AddBytes(Register[0], FromShort((short)(ToShort(CommandRegister) ^ 32767)));
+                    break;
+                case Cmds.INC:
+                    Register[0] = AddBytes(Register[0], FromShort(1));
+                    break;
+                case Cmds.DEC:
+                    Register[0] = AddBytes(Register[0], FromShort(-1));
+                    break;
+                case Cmds.LWDD:
+                    //mask = 1023 (00000011 11111111)
+                    Register[findRegNr()] = FromMemory((short)(ToShort(CommandRegister) & 1023), WORD_LENGTH);
+                    break;
+                case Cmds.SWDD:
+                    ToMemory(Register[findRegNr()], (short)(ToShort(CommandRegister) & 1023));
+                    break;
+                case Cmds.SRA:
+                    //TODO: correct shift right arithmetic
+                    var origSra = Register[0];
+                    CarryFlag = LSb(origSra);
+                    Register[0] = FromShort((short)(((ToShort(origSra) >> 1)) | (ToShort(origSra) & 192))); //192 = 11000000
+                    break;
+                case Cmds.SLA:
+                    //TODO: correct shift left arithmetic
+                    var origSla = Register[0];
+                    var origSlaMSb = MSb(origSla);
+                    CarryFlag = MSb(FromShort((short)(ToShort(origSla) >> 1)));
+                    Register[0] = FromShort((short)((ToShort(Register[0]) << 1)));
+                    break;
+                case Cmds.SRL:
+                    CarryFlag = LSb(Register[0]);
+                    Register[0] = FromShort((short)(ToShort(Register[0]) >> 1));
+                    break;
+                case Cmds.SLL:
+                    CarryFlag = MSb(Register[0]);
+                    Register[0] = FromShort((short)(ToShort(Register[0]) << 1));
+                    break;
+                case Cmds.AND:
+                    Register[0] = FromShort((short)(ToShort(Register[0]) & ToShort(Register[findRegNr()])));
+                    break;
+                case Cmds.OR:
+                    Register[0] = FromShort((short)(ToShort(Register[0]) | ToShort(Register[findRegNr()])));
+                    break;
+                case Cmds.NOT:
+                    Register[0] = FromShort((short)(~ToShort(Register[0]) - 1));
+                    break;
+                case Cmds.BZ:
+                    if (Register[0] == new byte[2] { 0, 0 })
+                    {
+                        countUp = false;
+                        CommandCounter = Register[findRegNr()];
+                    }
+                    break;
+                case Cmds.BNZ:
+                    if (Register[0] != new byte[2] { 0, 0 })
+                    {
+                        countUp = false;
+                        CommandCounter = Register[findRegNr()];
+                    }
+                    break;
+                case Cmds.BC:
+                    if (CarryFlag)
+                    {
+                        countUp = false;
+                        CommandCounter = Register[findRegNr()];
+                    }
+                    break;
+                case Cmds.B:
+                    countUp = false;
+                    CommandCounter = Register[findRegNr()];
+                    break;
+                case Cmds.BZD:
+                    if (Register[0] == new byte[2] { 0, 0 })
+                    {
+                        countUp = false;
+                        CommandCounter = FromShort((short)(ToShort(CommandRegister) & 1023));
+                    }
+                    break;
+                case Cmds.BNZD:
+                    if (Register[0] != new byte[2] { 0, 0 })
+                    {
+                        countUp = false;
+                        CommandCounter = FromShort((short)(ToShort(CommandRegister) & 1023));
+                    }
+                    break;
+                case Cmds.BCD:
+                    if (CarryFlag)
+                    {
+                        countUp = false;
+                        CommandCounter = FromShort((short)(ToShort(CommandRegister) & 1023));
+                    }
+                    break;
+                case Cmds.BD:
+                    countUp = false;
+                    CommandCounter = FromShort((short)(ToShort(CommandRegister) & 1023));
                     break;
             }
 
-            CommandCounter = FromShort((short)(ToShort(CommandCounter) + 2));
+            if (countUp)
+                CommandCounter = AddBytes(CommandCounter, FromShort(2));
             StepCounter++;
         }
 
@@ -136,9 +237,21 @@ namespace Utils
             CommandRegister = FromMemory((int)ToShort(CommandCounter), Cpu.WORD_LENGTH);
         }
 
-        public static byte[] AddBytes(byte[] b1, byte[] b2)
+        public static bool MSb(byte[] b)
         {
-            return FromShort((short)(ToShort(b1) + ToShort(b2)));
+            return ((b[0] >> 7) & 1) == 1;
+        }
+
+        public static bool LSb(byte[] b)
+        {
+            return (b[b.Length - 1] & 1) == 1;
+        }
+
+        public byte[] AddBytes(byte[] b1, byte[] b2)
+        {
+            var s = ToShort(b1) + ToShort(b2);
+            CarryFlag = s > short.MaxValue;
+            return FromShort((short)s);
         }
 
         public static short ToShort(byte[] bytes)
