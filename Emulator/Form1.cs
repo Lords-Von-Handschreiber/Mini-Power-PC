@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 using Utils;
 
@@ -17,6 +18,7 @@ namespace Emulator
 #if DEBUG
             args = new string[1];
             args[0] = "C:\\Users\\Thomas\\Dropbox\\_Todo\\minipowerpc\\Mini-Power-PC.lvhe";
+            args[0] = @"C:\Users\peacemaker\Desktop\Mini-Power-PC.lvhe";
 #endif
             if (args.Length > 0)
             {
@@ -31,16 +33,26 @@ namespace Emulator
                 cpu.IsRunnung = true;
                 var t = new System.Threading.Thread(new System.Threading.ThreadStart(delegate
                 {
-                    updateGui();
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        updateGui(); // runs on UI thread
+                    });
                     System.Threading.Thread.Sleep(750);
 
                     while (cpu.IsRunnung)
                     {
                         cpu.Fetch();
-                        updateGui();
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            updateGui(); // runs on UI thread
+                        });
+
 
                         cpu.Execute();
-                        updateGui();
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            updateGui(); // runs on UI thread
+                        });
 
                         System.Threading.Thread.Sleep(50);
                     }
@@ -51,9 +63,11 @@ namespace Emulator
         }
 
         private void updateGui()
-        {
+        {            
             if (listBoxReg0.Items.Count != 2)
+            {
                 listBoxReg0.Items.Add(cpu.Register[0][0] + " " + cpu.Register[0][1]);
+            }
             else
                 listBoxReg0.Items[1] = cpu.Register[0][0] + " " + cpu.Register[0][1];
 
