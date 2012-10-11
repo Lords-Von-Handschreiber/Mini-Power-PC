@@ -16,7 +16,7 @@ namespace Emulator
             cpu = new Cpu();
 #if DEBUG
             args = new string[1];
-            args[0] = "C:\\Users\\Thomas\\Dropbox\\_Todo\\minipowerpc\\Mini-Power-PC.lvhe";
+            args[0] = @"C:\Users\Thomas\Dropbox\ZHAW\LVH\Informatik\Semester-3\Aufgaben\Mini Power PC\Mini-Power-PC.lvhe";
 #endif
             if (args.Length > 0)
             {
