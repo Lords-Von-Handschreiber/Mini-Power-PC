@@ -53,8 +53,7 @@ namespace Emulator
                         {
                             updateGui(); // runs on UI thread
                         });
-
-                        System.Threading.Thread.Sleep(500);
+                        System.Threading.Thread.Sleep(25);
                     }
                 }));
 
@@ -100,15 +99,17 @@ namespace Emulator
             var cc = Cpu.ToShort(cpu.CommandCounter);
             for (var i = (cc - 5 * Cpu.WORD_LENGTH); i <= (cc + 10 * Cpu.WORD_LENGTH); i += Cpu.WORD_LENGTH)
             {
-                listBoxCommandStack.Items.Add(i + ": " + cpu.FromMemory(i, 1)[0] + " " + cpu.FromMemory(i + 1, 1)[0]);
+                listBoxCommandStack.Items.Add(i + ":\t" + cpu.FromMemory(i, 1)[0] + " " + cpu.FromMemory(i + 1, 1)[0]);
             }
             listBoxCommandStack.SelectedIndex = 5;
 
             listBoxMemoryStack.Items.Clear();
             for (var i = 500; i <= 529; i += Cpu.WORD_LENGTH)
             {
-                listBoxMemoryStack.Items.Add(i + ": " + cpu.FromMemory(i, 1)[0] + " " + cpu.FromMemory(i + 1, 1)[0]);
+                listBoxMemoryStack.Items.Add(i + ":\t" + cpu.FromMemory(i, 1)[0] + " " + cpu.FromMemory(i + 1, 1)[0]);
             }
+
+            toolStripStatusLabel1.Text = "Schritte: " + cpu.StepCounter;
         }
     }
 }

@@ -39,6 +39,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.checkBoxCarry = new System.Windows.Forms.CheckBox();
             this.listBoxCommandCounter = new System.Windows.Forms.ListBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBoxCommandStack
@@ -162,13 +165,28 @@
             this.listBoxCommandCounter.Size = new System.Drawing.Size(198, 36);
             this.listBoxCommandCounter.TabIndex = 11;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 308);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(634, 25);
+            this.statusStrip1.TabIndex = 12;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(151, 20);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(872, 420);
+            this.ClientSize = new System.Drawing.Size(634, 333);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.listBoxCommandCounter);
             this.Controls.Add(this.checkBoxCarry);
             this.Controls.Add(this.label2);
@@ -183,6 +201,8 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mini-Power-PC - Emulator";
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -201,6 +221,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBoxCarry;
         private System.Windows.Forms.ListBox listBoxCommandCounter;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
 
     }
 }
