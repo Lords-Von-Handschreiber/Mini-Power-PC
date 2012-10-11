@@ -116,9 +116,14 @@ namespace Utils
                     break;
                 case Cmds.ADD:
                     regNr = findRegNr();
-                    Register[0] = FromShort((short)(ToShort(Register[0]) + ToShort(Register[regNr])));
+                    Register[0] = AddBytes(Register[0], Register[regNr]); // FromShort((short)(ToShort(Register[0]) + ToShort(Register[regNr])));
                     // TODO: carryflag korrekt setzen
                     CarryFlag = false;
+                    break;
+                case Cmds.ADDD:
+                    short nr = (short)((short)cmd ^ (1 << 15));
+                    Register[0] = AddBytes(Register[0], FromShort(nr));
+                    //mask = 32767
                     break;
             }
 
@@ -131,14 +136,19 @@ namespace Utils
             CommandRegister = FromMemory((int)ToShort(CommandCounter), Cpu.WORD_LENGTH);
         }
 
+        public static byte[] AddBytes(byte[] b1, byte[] b2)
+        {
+            return FromShort((short)(ToShort(b1) + ToShort(b2)));
+        }
+
         public static short ToShort(byte[] bytes)
         {
-            return (short)((bytes[1] << 8) | (bytes[0] << 0));
+            return (short)((bytes[0] << 8) | (bytes[1] << 0));
         }
 
         public static byte[] FromShort(short number)
         {
-            return new[] { (byte)(number & 255), (byte)(number >> 8) }; //TODO: or other way round...
+            return new[] { (byte)(number >> 8), (byte)(number & 255) };
         }
     }
 }
