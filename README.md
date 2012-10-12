@@ -24,7 +24,7 @@ Schreiben Sie ein Programm in einer beliebigen Programmiersprache/Umgebung, das 
     * Slow-Modus: Während des Programmablaufs wird nach Bearbeitung eines jeden Befehls die Ausgabe aktualisiert
     * Step-Modus: Wie der Slow-Modus, jedoch wird das Programm nach Bearbeitung eines jeden Befehls unterbrochen und wird erst nach einer Bestätigung durch den User (z. B. Drücken einer Taste) wieder fortgesetzt
 
-## Authoren
+## Autoren
 Christian Bachmann - @coffeefan
 
 Luca Selinger - @peac3maker
