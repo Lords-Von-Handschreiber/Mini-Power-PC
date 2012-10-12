@@ -1,62 +1,98 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-
     <title>Mini-Power-Pc by Lords-Von-Handschreiber</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
-
-    <header>
-      <div class="container">
+    <div class="wrapper">
+      <header>
         <h1>Mini-Power-Pc</h1>
-        <h2></h2>
+        <p>PowerPC, Emulator, Processor</p>
 
-        <section id="downloads">
-          <a href="https://github.com/Lords-Von-Handschreiber/edu-zhaw-inf-Mini-Power-PC/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/Lords-Von-Handschreiber/edu-zhaw-inf-Mini-Power-PC/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/Lords-Von-Handschreiber/edu-zhaw-inf-Mini-Power-PC" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
+        <p class="view"><a href="https://github.com/Lords-Von-Handschreiber/edu-zhaw-inf-Mini-Power-PC">View the Project on GitHub <small>Lords-Von-Handschreiber/edu-zhaw-inf-Mini-Power-PC</small></a></p>
 
-    <div class="container">
-      <section id="main_content">
-        <h3>Welcome to GitHub Pages.</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+        <ul>
+          <li><a href="https://github.com/Lords-Von-Handschreiber/edu-zhaw-inf-Mini-Power-PC/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/Lords-Von-Handschreiber/edu-zhaw-inf-Mini-Power-PC/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/Lords-Von-Handschreiber/edu-zhaw-inf-Mini-Power-PC">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>Aufgabe "Mini-Power-PC"</h1>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<h2>Aufgabenbeschreibung</h2>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>Schreiben Sie ein Programm in einer beliebigen Programmiersprache/Umgebung, das den in der Vorlesung spezifizierten "Mini-Power-PC" emuliert - d.h. alle Befehle des Befehlssatzes (siehe Anlage Befehlssatz "Mini-Power-PC") ausführt.</p>
 
-<h3>Designer Templates</h3>
+<ol>
+<li>Aufgabe
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<ul>
+<li>Als Eingabe soll gelesen werden: (2 Punkte)
 
-<h3>Rather Drive Stick?</h3>
+<ul>
+<li>Ein beliebiges mit dem Befehlssatz geschriebenes Programm, das ab Speicher 100 in den Speicher eingelesen wird</li>
+<li>Die Parameter des Programms (Eingabewerte) ab Speicher 500 (Der Op-Code und die Parameter des Programms können als Binär-, Dezimal- oder Hex-Zahlen eingelesen werden - Ihre Wahl)</li>
+</ul>
+</li>
+<li>Als Ausgabe wird folgendes erwartet: (3 + 2 Punkte)
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<ul>
+<li>Die aktuellen Zustände der Register:
 
-<h3>Authors and Contributors</h3>
+<ul>
+<li>Befehlszähler, Befehlsregister</li>
+<li>Akkumulator, Carry-Bit</li>
+<li>Reg-1, Reg-2, Reg-3</li>
+<li>Optional: Alle Werte auch als Binär-Werte (16 Bit)</li>
+</ul>
+</li>
+<li>Der aktuelle decodierte Befehl aus dem Befehlsregister (als Mnemonics) (1 Punkt)</li>
+<li>Der aktuelle Zustand des Speichers:
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<ul>
+<li>5 Befehle vor bis 10 Befehle nach dem aktuellen Befehl</li>
+<li>Der Inhalt der Speicherzellen 500 bis 529 (wortweise)</li>
+<li>Optional: alle Werte auch als Binär-Werte (16 Bit)</li>
+</ul>
+</li>
+<li>Die Anzahl der durchgeführten Befehle (zum Programmstart 0)</li>
+</ul>
+</li>
+<li>Implementieren Sie einen "schnellen" und einen "slow" Modus sowie optional einen "Step-Modus": (2 + 2 Punkte)
 
-<h3>Support or Contact</h3>
+<ul>
+<li>Schneller Modus: Während des Programmablaufs erfolgt keine Ausgabe (keine Aktualisierung der Ausgabedaten); diese werden erst am Programmende aktualisiert</li>
+<li>Slow-Modus: Während des Programmablaufs wird nach Bearbeitung eines jeden Befehls die Ausgabe aktualisiert</li>
+<li>Step-Modus: Wie der Slow-Modus, jedoch wird das Programm nach Bearbeitung eines jeden Befehls unterbrochen und wird erst nach einer Bestätigung durch den User (z. B. Drücken einer Taste) wieder fortgesetzt</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol><h2>Authoren</h2>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>Christian Bachmann - <a href="https://github.com/coffeefan" class="user-mention">@coffeefan</a></p>
+
+<p>Luca Selinger - <a href="https://github.com/peac3maker" class="user-mention">@peac3maker</a></p>
+
+<p>Thomas Bandixen - <a href="https://github.com/tbandixen" class="user-mention">@tbandixen</a></p>
       </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/Lords-Von-Handschreiber">Lords-Von-Handschreiber</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-
+    <script src="javascripts/scale.fix.js"></script>
     
   </body>
 </html>
