@@ -231,5 +231,10 @@ namespace Emulator
             activeMode = (ToolStripMenuItem)sender;
             StepMode = (StepModeEnum)Enum.Parse(typeof(StepModeEnum), activeMode.Text);
         }
+
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
