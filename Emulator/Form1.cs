@@ -10,6 +10,10 @@ namespace Emulator
     {
         private Cpu cpu;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1" /> class.
+        /// </summary>
+        /// <param name="args">The args.</param>
         public Form1(string[] args)
         {
             InitializeComponent();
@@ -20,14 +24,18 @@ namespace Emulator
             args[0] = @"C:\Users\peacemaker\Desktop\Mini-Power-PC.lvhe";
             args[0] = @"C:\Users\Thomas\Dropbox\ZHAW\LVH\Informatik\Semester-3\Aufgaben\Mini Power PC\Addition.lvhe";
 #endif
+            // Falls ein File als Parameter mit angegeben wurde, den Emulator damit starten
             if (args.Length > 0)
             {
                 var file = new FileInfo(args[0]);
+                // Das Programm in den Speicher #100 schreiben
                 using (var br = new BinaryReader(file.OpenRead()))
                 {
                     cpu.ToMemory(br.ReadBytes((int)file.Length), 100);
                 }
+
                 var paramFile = new FileInfo(args[0] + ".param");
+                // Falls Parameter mitangegeben wurden, den Speicher ab #500 damit befüllen
                 if (paramFile.Exists)
                 {
                     using (var br = new BinaryReader(paramFile.OpenRead()))
@@ -35,8 +43,7 @@ namespace Emulator
                         cpu.ToMemory(br.ReadBytes((int)paramFile.Length), 500);
                     }
                 }
-
-
+                
                 cpu.IsRunnung = true;
                 var t = new System.Threading.Thread(new System.Threading.ThreadStart(delegate
                 {
@@ -68,6 +75,9 @@ namespace Emulator
             }
         }
 
+        /// <summary>
+        /// Updates the GUI.
+        /// </summary>
         private void updateGui()
         {
             if (listBoxReg0.Items.Count != 2)

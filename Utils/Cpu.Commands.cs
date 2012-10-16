@@ -36,6 +36,10 @@ namespace Utils
             SWDD = 24576
         }
 
+        /// <summary>
+        /// Finds the command.
+        /// </summary>
+        /// <returns></returns>
         private Cmds find()
         {
             var currentCommand = ToShort(CommandRegister);
@@ -101,11 +105,18 @@ namespace Utils
             return Cmds.UNDEFINED;
         }
 
+        /// <summary>
+        /// Finds the registry number.
+        /// </summary>
+        /// <returns></returns>
         private short findRegNr()
         {
             return (short)((ToShort(CommandRegister) & (3 << 10)) >> 10);
         }
 
+        /// <summary>
+        /// Executes the command.
+        /// </summary>
         public void Execute()
         {
             Cmds cmd = find();
@@ -234,21 +245,40 @@ namespace Utils
                 StepCounter++;
         }
 
+        /// <summary>
+        /// Fetches the command.
+        /// </summary>
         public void Fetch()
         {
             CommandRegister = FromMemory((int)ToShort(CommandCounter), Cpu.WORD_LENGTH);
         }
 
+        /// <summary>
+        /// Most significant bit.
+        /// </summary>
+        /// <param name="b">The b.</param>
+        /// <returns></returns>
         public static bool MSb(byte[] b)
         {
             return ((b[0] >> 7) & 1) == 1;
         }
 
+        /// <summary>
+        /// Least significant bit.
+        /// </summary>
+        /// <param name="b">The b.</param>
+        /// <returns></returns>
         public static bool LSb(byte[] b)
         {
             return (b[b.Length - 1] & 1) == 1;
         }
 
+        /// <summary>
+        /// Addition of bytes.
+        /// </summary>
+        /// <param name="b1">The b1.</param>
+        /// <param name="b2">The b2.</param>
+        /// <returns></returns>
         public byte[] AddBytes(byte[] b1, byte[] b2)
         {
             var s = ToShort(b1) + ToShort(b2);
@@ -256,11 +286,21 @@ namespace Utils
             return FromShort((short)s);
         }
 
+        /// <summary>
+        /// Converts to short.
+        /// </summary>
+        /// <param name="bytes">The bytes.</param>
+        /// <returns></returns>
         public static short ToShort(byte[] bytes)
         {
             return (short)((bytes[0] << 8) | (bytes[1] << 0));
         }
 
+        /// <summary>
+        /// Converts from short.
+        /// </summary>
+        /// <param name="number">The number.</param>
+        /// <returns></returns>
         public static byte[] FromShort(short number)
         {
             return new[] { (byte)(number >> 8), (byte)(number & 255) };

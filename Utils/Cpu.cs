@@ -18,6 +18,9 @@ namespace Utils
 
         public bool IsRunnung { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Cpu" /> class.
+        /// </summary>
         public Cpu()
         {
             CommandCounter = FromShort(100);
@@ -37,6 +40,11 @@ namespace Utils
             CarryFlag = false;
         }
 
+        /// <summary>
+        /// Writes to the memory.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <param name="offset">The offset.</param>
         public void ToMemory(byte[] data, int offset)
         {
             for (var i = 0; i < data.Length; i++)
@@ -45,11 +53,22 @@ namespace Utils
             }
         }
 
+        /// <summary>
+        /// Reads from the memory.
+        /// </summary>
+        /// <param name="offset">The offset.</param>
+        /// <returns></returns>
         public byte[] FromMemory(int offset)
         {
             return FromMemory(offset, Memory.Length - offset);
         }
 
+        /// <summary>
+        /// Reads from the memory.
+        /// </summary>
+        /// <param name="offset">The offset.</param>
+        /// <param name="count">The count.</param>
+        /// <returns></returns>
         public byte[] FromMemory(int offset, int count)
         {
             byte[] retVal = new byte[count];

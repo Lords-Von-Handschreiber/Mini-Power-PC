@@ -9,6 +9,12 @@ namespace Utils
 {
     public static class Compiler
     {
+        /// <summary>
+        /// Compiles the specified content.
+        /// </summary>
+        /// <param name="content">The content.</param>
+        /// <param name="parameter">The parameter.</param>
+        /// <param name="file">The file.</param>
         public static void Compile(string content, string parameter, FileInfo file)
         {
             var paramFile = new FileInfo(file.FullName + ".param");
