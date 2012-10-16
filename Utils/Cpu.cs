@@ -23,8 +23,6 @@ namespace Utils
         /// </summary>
         public Cpu()
         {
-            CommandCounter = FromShort(100);
-
             IsRunnung = false;
 
             Register = new byte[4][];
