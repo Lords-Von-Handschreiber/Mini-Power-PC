@@ -187,7 +187,7 @@ namespace Emulator
                 updateGui(); // runs on UI thread
             });
 
-            // re-init for a next run ssh check
+            // re-init for a next run
             cpu.CommandCounter = Cpu.FromShort(100);
             cpu.StepCounter = 0;
 
