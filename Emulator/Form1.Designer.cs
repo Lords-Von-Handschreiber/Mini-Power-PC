@@ -29,30 +29,36 @@
         private void InitializeComponent()
         {
             this.listBoxCommandStack = new System.Windows.Forms.ListBox();
-            this.listBoxReg0 = new System.Windows.Forms.ListBox();
-            this.listBoxReg1 = new System.Windows.Forms.ListBox();
-            this.listBoxReg2 = new System.Windows.Forms.ListBox();
-            this.listBoxReg3 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.listBoxRegCommand = new System.Windows.Forms.ListBox();
             this.listBoxMemoryStack = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.checkBoxCarry = new System.Windows.Forms.CheckBox();
-            this.listBoxCommandCounter = new System.Windows.Forms.ListBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxCommandCounter = new System.Windows.Forms.TextBox();
+            this.labelCommandCounter = new System.Windows.Forms.Label();
+            this.textBoxRegCommand = new System.Windows.Forms.TextBox();
+            this.labelRegCommand = new System.Windows.Forms.Label();
+            this.textBoxReg3 = new System.Windows.Forms.TextBox();
+            this.labelReg3 = new System.Windows.Forms.Label();
+            this.textBoxReg2 = new System.Windows.Forms.TextBox();
+            this.labelReg2 = new System.Windows.Forms.Label();
+            this.textBoxReg1 = new System.Windows.Forms.TextBox();
+            this.labelReg1 = new System.Windows.Forms.Label();
+            this.textBoxReg0 = new System.Windows.Forms.TextBox();
+            this.labelReg0 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.slowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stepToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fastToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -68,54 +74,6 @@
             this.listBoxCommandStack.Size = new System.Drawing.Size(198, 260);
             this.listBoxCommandStack.TabIndex = 0;
             // 
-            // listBoxReg0
-            // 
-            this.listBoxReg0.Enabled = false;
-            this.listBoxReg0.FormattingEnabled = true;
-            this.listBoxReg0.ItemHeight = 16;
-            this.listBoxReg0.Items.AddRange(new object[] {
-            "Akkumulator"});
-            this.listBoxReg0.Location = new System.Drawing.Point(207, 20);
-            this.listBoxReg0.Name = "listBoxReg0";
-            this.listBoxReg0.Size = new System.Drawing.Size(198, 36);
-            this.listBoxReg0.TabIndex = 1;
-            // 
-            // listBoxReg1
-            // 
-            this.listBoxReg1.Enabled = false;
-            this.listBoxReg1.FormattingEnabled = true;
-            this.listBoxReg1.ItemHeight = 16;
-            this.listBoxReg1.Items.AddRange(new object[] {
-            "Register 1"});
-            this.listBoxReg1.Location = new System.Drawing.Point(207, 62);
-            this.listBoxReg1.Name = "listBoxReg1";
-            this.listBoxReg1.Size = new System.Drawing.Size(198, 36);
-            this.listBoxReg1.TabIndex = 2;
-            // 
-            // listBoxReg2
-            // 
-            this.listBoxReg2.Enabled = false;
-            this.listBoxReg2.FormattingEnabled = true;
-            this.listBoxReg2.ItemHeight = 16;
-            this.listBoxReg2.Items.AddRange(new object[] {
-            "Register 2"});
-            this.listBoxReg2.Location = new System.Drawing.Point(207, 104);
-            this.listBoxReg2.Name = "listBoxReg2";
-            this.listBoxReg2.Size = new System.Drawing.Size(198, 36);
-            this.listBoxReg2.TabIndex = 3;
-            // 
-            // listBoxReg3
-            // 
-            this.listBoxReg3.Enabled = false;
-            this.listBoxReg3.FormattingEnabled = true;
-            this.listBoxReg3.ItemHeight = 16;
-            this.listBoxReg3.Items.AddRange(new object[] {
-            "Register 3"});
-            this.listBoxReg3.Location = new System.Drawing.Point(207, 146);
-            this.listBoxReg3.Name = "listBoxReg3";
-            this.listBoxReg3.Size = new System.Drawing.Size(198, 36);
-            this.listBoxReg3.TabIndex = 4;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -124,18 +82,6 @@
             this.label1.Size = new System.Drawing.Size(103, 17);
             this.label1.TabIndex = 5;
             this.label1.Text = "Speicher Stack";
-            // 
-            // listBoxRegCommand
-            // 
-            this.listBoxRegCommand.Enabled = false;
-            this.listBoxRegCommand.FormattingEnabled = true;
-            this.listBoxRegCommand.ItemHeight = 16;
-            this.listBoxRegCommand.Items.AddRange(new object[] {
-            "Befehlsregister"});
-            this.listBoxRegCommand.Location = new System.Drawing.Point(207, 188);
-            this.listBoxRegCommand.Name = "listBoxRegCommand";
-            this.listBoxRegCommand.Size = new System.Drawing.Size(198, 36);
-            this.listBoxRegCommand.TabIndex = 6;
             // 
             // listBoxMemoryStack
             // 
@@ -160,33 +106,21 @@
             // 
             this.checkBoxCarry.AutoSize = true;
             this.checkBoxCarry.Enabled = false;
-            this.checkBoxCarry.Location = new System.Drawing.Point(207, 272);
+            this.checkBoxCarry.Location = new System.Drawing.Point(207, 273);
             this.checkBoxCarry.Name = "checkBoxCarry";
             this.checkBoxCarry.Size = new System.Drawing.Size(96, 21);
             this.checkBoxCarry.TabIndex = 10;
             this.checkBoxCarry.Text = "Carry-Flag";
             this.checkBoxCarry.UseVisualStyleBackColor = true;
             // 
-            // listBoxCommandCounter
-            // 
-            this.listBoxCommandCounter.Enabled = false;
-            this.listBoxCommandCounter.FormattingEnabled = true;
-            this.listBoxCommandCounter.ItemHeight = 16;
-            this.listBoxCommandCounter.Items.AddRange(new object[] {
-            "Befehlszähler"});
-            this.listBoxCommandCounter.Location = new System.Drawing.Point(207, 230);
-            this.listBoxCommandCounter.Name = "listBoxCommandCounter";
-            this.listBoxCommandCounter.Size = new System.Drawing.Size(198, 36);
-            this.listBoxCommandCounter.TabIndex = 11;
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 325);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 326);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(616, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(614, 25);
             this.statusStrip1.TabIndex = 12;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -204,22 +138,142 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.textBoxCommandCounter);
+            this.panel1.Controls.Add(this.labelCommandCounter);
+            this.panel1.Controls.Add(this.textBoxRegCommand);
+            this.panel1.Controls.Add(this.labelRegCommand);
+            this.panel1.Controls.Add(this.textBoxReg3);
+            this.panel1.Controls.Add(this.labelReg3);
+            this.panel1.Controls.Add(this.textBoxReg2);
+            this.panel1.Controls.Add(this.labelReg2);
+            this.panel1.Controls.Add(this.textBoxReg1);
+            this.panel1.Controls.Add(this.labelReg1);
+            this.panel1.Controls.Add(this.textBoxReg0);
+            this.panel1.Controls.Add(this.labelReg0);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.listBoxCommandStack);
-            this.panel1.Controls.Add(this.listBoxCommandCounter);
-            this.panel1.Controls.Add(this.listBoxReg0);
             this.panel1.Controls.Add(this.checkBoxCarry);
-            this.panel1.Controls.Add(this.listBoxReg1);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.listBoxReg2);
             this.panel1.Controls.Add(this.listBoxMemoryStack);
-            this.panel1.Controls.Add(this.listBoxReg3);
-            this.panel1.Controls.Add(this.listBoxRegCommand);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 28);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(616, 297);
+            this.panel1.Size = new System.Drawing.Size(614, 298);
             this.panel1.TabIndex = 13;
+            // 
+            // textBoxCommandCounter
+            // 
+            this.textBoxCommandCounter.Location = new System.Drawing.Point(207, 245);
+            this.textBoxCommandCounter.Name = "textBoxCommandCounter";
+            this.textBoxCommandCounter.ReadOnly = true;
+            this.textBoxCommandCounter.Size = new System.Drawing.Size(198, 22);
+            this.textBoxCommandCounter.TabIndex = 23;
+            this.textBoxCommandCounter.TabStop = false;
+            this.textBoxCommandCounter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelCommandCounter
+            // 
+            this.labelCommandCounter.AutoSize = true;
+            this.labelCommandCounter.Location = new System.Drawing.Point(207, 225);
+            this.labelCommandCounter.Name = "labelCommandCounter";
+            this.labelCommandCounter.Size = new System.Drawing.Size(87, 17);
+            this.labelCommandCounter.TabIndex = 22;
+            this.labelCommandCounter.Text = "Befehlzähler";
+            // 
+            // textBoxRegCommand
+            // 
+            this.textBoxRegCommand.Location = new System.Drawing.Point(207, 200);
+            this.textBoxRegCommand.Name = "textBoxRegCommand";
+            this.textBoxRegCommand.ReadOnly = true;
+            this.textBoxRegCommand.Size = new System.Drawing.Size(198, 22);
+            this.textBoxRegCommand.TabIndex = 21;
+            this.textBoxRegCommand.TabStop = false;
+            this.textBoxRegCommand.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelRegCommand
+            // 
+            this.labelRegCommand.AutoSize = true;
+            this.labelRegCommand.Location = new System.Drawing.Point(207, 180);
+            this.labelRegCommand.Name = "labelRegCommand";
+            this.labelRegCommand.Size = new System.Drawing.Size(103, 17);
+            this.labelRegCommand.TabIndex = 20;
+            this.labelRegCommand.Text = "Befehlsregister";
+            // 
+            // textBoxReg3
+            // 
+            this.textBoxReg3.Location = new System.Drawing.Point(207, 155);
+            this.textBoxReg3.Name = "textBoxReg3";
+            this.textBoxReg3.ReadOnly = true;
+            this.textBoxReg3.Size = new System.Drawing.Size(198, 22);
+            this.textBoxReg3.TabIndex = 19;
+            this.textBoxReg3.TabStop = false;
+            this.textBoxReg3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelReg3
+            // 
+            this.labelReg3.AutoSize = true;
+            this.labelReg3.Location = new System.Drawing.Point(207, 135);
+            this.labelReg3.Name = "labelReg3";
+            this.labelReg3.Size = new System.Drawing.Size(73, 17);
+            this.labelReg3.TabIndex = 18;
+            this.labelReg3.Text = "Register 3";
+            // 
+            // textBoxReg2
+            // 
+            this.textBoxReg2.Location = new System.Drawing.Point(207, 110);
+            this.textBoxReg2.Name = "textBoxReg2";
+            this.textBoxReg2.ReadOnly = true;
+            this.textBoxReg2.Size = new System.Drawing.Size(198, 22);
+            this.textBoxReg2.TabIndex = 17;
+            this.textBoxReg2.TabStop = false;
+            this.textBoxReg2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelReg2
+            // 
+            this.labelReg2.AutoSize = true;
+            this.labelReg2.Location = new System.Drawing.Point(207, 90);
+            this.labelReg2.Name = "labelReg2";
+            this.labelReg2.Size = new System.Drawing.Size(73, 17);
+            this.labelReg2.TabIndex = 16;
+            this.labelReg2.Text = "Register 2";
+            // 
+            // textBoxReg1
+            // 
+            this.textBoxReg1.Location = new System.Drawing.Point(207, 65);
+            this.textBoxReg1.Name = "textBoxReg1";
+            this.textBoxReg1.ReadOnly = true;
+            this.textBoxReg1.Size = new System.Drawing.Size(198, 22);
+            this.textBoxReg1.TabIndex = 15;
+            this.textBoxReg1.TabStop = false;
+            this.textBoxReg1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelReg1
+            // 
+            this.labelReg1.AutoSize = true;
+            this.labelReg1.Location = new System.Drawing.Point(207, 45);
+            this.labelReg1.Name = "labelReg1";
+            this.labelReg1.Size = new System.Drawing.Size(73, 17);
+            this.labelReg1.TabIndex = 14;
+            this.labelReg1.Text = "Register 1";
+            // 
+            // textBoxReg0
+            // 
+            this.textBoxReg0.Location = new System.Drawing.Point(207, 20);
+            this.textBoxReg0.Name = "textBoxReg0";
+            this.textBoxReg0.ReadOnly = true;
+            this.textBoxReg0.Size = new System.Drawing.Size(198, 22);
+            this.textBoxReg0.TabIndex = 13;
+            this.textBoxReg0.TabStop = false;
+            this.textBoxReg0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelReg0
+            // 
+            this.labelReg0.AutoSize = true;
+            this.labelReg0.Location = new System.Drawing.Point(207, 0);
+            this.labelReg0.Name = "labelReg0";
+            this.labelReg0.Size = new System.Drawing.Size(86, 17);
+            this.labelReg0.TabIndex = 12;
+            this.labelReg0.Text = "Akkumulator";
             // 
             // menuStrip1
             // 
@@ -228,7 +282,7 @@
             this.modeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(616, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(614, 28);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -258,6 +312,19 @@
             this.resetToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
             this.resetToolStripMenuItem.Text = "&Reset";
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
+            // 
+            // quitToolStripMenuItem
+            // 
+            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
+            this.quitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
+            this.quitToolStripMenuItem.Text = "&Quit";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
             // modeToolStripMenuItem
             // 
@@ -298,24 +365,11 @@
             this.fastToolStripMenuItem.Text = "Fast";
             this.fastToolStripMenuItem.Click += new System.EventHandler(this.stepMode_Click);
             // 
-            // quitToolStripMenuItem
-            // 
-            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(196, 24);
-            this.quitToolStripMenuItem.Text = "&Quit";
-            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(616, 350);
+            this.ClientSize = new System.Drawing.Size(614, 351);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -336,16 +390,10 @@
         #endregion
 
         private System.Windows.Forms.ListBox listBoxCommandStack;
-        private System.Windows.Forms.ListBox listBoxReg0;
-        private System.Windows.Forms.ListBox listBoxReg1;
-        private System.Windows.Forms.ListBox listBoxReg2;
-        private System.Windows.Forms.ListBox listBoxReg3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox listBoxRegCommand;
         private System.Windows.Forms.ListBox listBoxMemoryStack;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBoxCarry;
-        private System.Windows.Forms.ListBox listBoxCommandCounter;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.Panel panel1;
@@ -360,6 +408,18 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.TextBox textBoxReg0;
+        private System.Windows.Forms.Label labelReg0;
+        private System.Windows.Forms.Label labelReg1;
+        private System.Windows.Forms.TextBox textBoxReg1;
+        private System.Windows.Forms.TextBox textBoxReg2;
+        private System.Windows.Forms.Label labelReg2;
+        private System.Windows.Forms.TextBox textBoxReg3;
+        private System.Windows.Forms.Label labelReg3;
+        private System.Windows.Forms.TextBox textBoxRegCommand;
+        private System.Windows.Forms.Label labelRegCommand;
+        private System.Windows.Forms.TextBox textBoxCommandCounter;
+        private System.Windows.Forms.Label labelCommandCounter;
 
     }
 }

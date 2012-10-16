@@ -79,48 +79,12 @@ namespace Emulator
         /// </summary>
         private void updateGui()
         {
-            if (listBoxReg0.Items.Count != 2)
-                listBoxReg0.Items.Add(Cpu.ToBinaryString(cpu.Register[0]));
-            //listBoxReg0.Items.Add(cpu.Register[0][0] + " " + cpu.Register[0][1]);
-            else
-                listBoxReg0.Items[1] = Cpu.ToBinaryString(cpu.Register[0]);
-            //listBoxReg0.Items[1] = cpu.Register[0][0] + " " + cpu.Register[0][1];
-
-            if (listBoxReg1.Items.Count != 2)
-                listBoxReg1.Items.Add(Cpu.ToBinaryString(cpu.Register[1]));
-            //listBoxReg1.Items.Add(cpu.Register[1][0] + " " + cpu.Register[1][1]);
-            else
-                listBoxReg1.Items[1] = Cpu.ToBinaryString(cpu.Register[1]);
-            //listBoxReg1.Items[1] = cpu.Register[1][0] + " " + cpu.Register[1][1];
-
-            if (listBoxReg2.Items.Count != 2)
-                listBoxReg2.Items.Add(Cpu.ToBinaryString(cpu.Register[2]));
-            //listBoxReg2.Items.Add(cpu.Register[2][0] + " " + cpu.Register[2][1]);
-            else
-                listBoxReg2.Items[1] = Cpu.ToBinaryString(cpu.Register[2]);
-            //listBoxReg2.Items[1] = cpu.Register[2][0] + " " + cpu.Register[2][1];
-
-            if (listBoxReg3.Items.Count != 2)
-                listBoxReg3.Items.Add(Cpu.ToBinaryString(cpu.Register[3]));
-            //listBoxReg3.Items.Add(cpu.Register[3][0] + " " + cpu.Register[3][1]);
-            else
-                listBoxReg3.Items[1] = Cpu.ToBinaryString(cpu.Register[3]);
-            //listBoxReg3.Items[1] = cpu.Register[3][0] + " " + cpu.Register[3][1];
-
-            if (listBoxRegCommand.Items.Count != 2)
-                listBoxRegCommand.Items.Add(Cpu.ToBinaryString(cpu.CommandRegister));
-            //listBoxRegCommand.Items.Add(cpu.CommandRegister[0] + " " + cpu.CommandRegister[1]);
-            else
-                listBoxRegCommand.Items[1] = Cpu.ToBinaryString(cpu.CommandRegister);
-            //listBoxRegCommand.Items[1] = cpu.CommandRegister[0] + " " + cpu.CommandRegister[1];
-
-            if (listBoxCommandCounter.Items.Count != 2)
-                listBoxCommandCounter.Items.Add(Cpu.ToBinaryString(cpu.CommandCounter));
-            //listBoxCommandCounter.Items.Add(cpu.CommandCounter[0] + " " + cpu.CommandCounter[1]);
-            else
-                listBoxCommandCounter.Items[1] = Cpu.ToBinaryString(cpu.CommandCounter);
-            //listBoxCommandCounter.Items[1] = cpu.CommandCounter[0] + " " + cpu.CommandCounter[1];
-
+            textBoxReg0.Text = Cpu.ToBinaryString(cpu.Register[0]);
+            textBoxReg1.Text = Cpu.ToBinaryString(cpu.Register[1]);
+            textBoxReg2.Text = Cpu.ToBinaryString(cpu.Register[2]);
+            textBoxReg3.Text = Cpu.ToBinaryString(cpu.Register[3]);
+            textBoxRegCommand.Text = Cpu.ToBinaryString(cpu.CommandRegister);
+            textBoxCommandCounter.Text = Cpu.ToBinaryString(cpu.CommandCounter);
             checkBoxCarry.Enabled = cpu.CarryFlag;
 
             listBoxCommandStack.Items.Clear();
