@@ -18,17 +18,24 @@ namespace Emulator
 #if DEBUG
             args = new string[1];
             args[0] = @"C:\Users\peacemaker\Desktop\Mini-Power-PC.lvhe";
-            args[0] = @"C:\Users\Thomas\Dropbox\ZHAW\LVH\Informatik\Semester-3\Aufgaben\Mini Power PC\Mini-Power-PC.lvhe";
+            args[0] = @"C:\Users\Thomas\Dropbox\ZHAW\LVH\Informatik\Semester-3\Aufgaben\Mini Power PC\Addition.lvhe";
 #endif
             if (args.Length > 0)
             {
                 var file = new FileInfo(args[0]);
-                byte[] content;
                 using (var br = new BinaryReader(file.OpenRead()))
                 {
-                    content = br.ReadBytes((int)file.Length);
+                    cpu.ToMemory(br.ReadBytes((int)file.Length), 100);
                 }
-                cpu.ToMemory(content, 100);
+                var paramFile = new FileInfo(args[0] + ".param");
+                if (paramFile.Exists)
+                {
+                    using (var br = new BinaryReader(paramFile.OpenRead()))
+                    {
+                        cpu.ToMemory(br.ReadBytes((int)paramFile.Length), 500);
+                    }
+                }
+
 
                 cpu.IsRunnung = true;
                 var t = new System.Threading.Thread(new System.Threading.ThreadStart(delegate

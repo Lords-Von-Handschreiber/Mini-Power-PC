@@ -11,6 +11,7 @@ namespace Utils
     {
         public static bool IsSaved { get; set; }
         public static FileInfo ActiveFile { get; set; }
+        public static FileInfo ActiveCompileFile { get; set; }
 
         static FileTracker()
         {

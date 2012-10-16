@@ -15,6 +15,7 @@ namespace Compiler
     public partial class Form1 : Form
     {
         private const string FORM_TITLE = "Mini-Power-PC - Editor/Compiler - ";
+        private const string PARAM_SEPERATOR = "~~params~~";
 
         public Form1(string[] args)
         {
@@ -22,7 +23,10 @@ namespace Compiler
             if (args.Length > 0)
             {
                 FileTracker.ActiveFile = new FileInfo(args[0]);
-                richTextBox.Text = FileTracker.OpenFile(FileTracker.ActiveFile);
+                var content = FileTracker.OpenFile(FileTracker.ActiveFile).Split(PARAM_SEPERATOR.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                richTextBox.Text = content[0];
+                if (content.Length > 1)
+                    richTextBox1.Text = content[1];
                 FileTracker.IsSaved = true;
                 saveToolStripMenuItem.Enabled = false;
                 updateFormText();
@@ -61,13 +65,13 @@ namespace Compiler
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
         {
             FileTracker.ActiveFile = new FileInfo(saveFileDialog.FileName);
-            FileTracker.SaveFile(richTextBox.Text);
+            FileTracker.SaveFile(richTextBox.Text + PARAM_SEPERATOR + richTextBox1.Text);
             updateFormText();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileTracker.SaveFile(richTextBox.Text);
+            FileTracker.SaveFile(richTextBox.Text + PARAM_SEPERATOR + richTextBox1.Text);
             updateFormText();
             saveToolStripMenuItem.Enabled = false;
         }
@@ -91,13 +95,22 @@ namespace Compiler
 
         private void compileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            saveCompiledFileDialog.ShowDialog();
+            if (FileTracker.ActiveCompileFile != null)
+                Utils.Compiler.Compile(richTextBox.Text, richTextBox1.Text, FileTracker.ActiveCompileFile);
+            else
+                saveCompiledFileDialog.ShowDialog();
         }
 
         private void saveCombiledFileDialog_FileOk(object sender, CancelEventArgs e)
         {
-            FileTracker.SaveFile(richTextBox.Text);
-            Utils.Compiler.Compile(richTextBox.Text, new FileInfo(saveCompiledFileDialog.FileName));
+            FileTracker.ActiveCompileFile = new FileInfo(saveCompiledFileDialog.FileName);
+            FileTracker.SaveFile(richTextBox.Text + PARAM_SEPERATOR + richTextBox1.Text);
+            Utils.Compiler.Compile(richTextBox.Text, richTextBox1.Text, FileTracker.ActiveCompileFile);
+        }
+
+        private void compileAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveCompiledFileDialog.ShowDialog();
         }
     }
 }
