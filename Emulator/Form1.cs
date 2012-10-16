@@ -43,7 +43,7 @@ namespace Emulator
                         cpu.ToMemory(br.ReadBytes((int)paramFile.Length), 500);
                     }
                 }
-                
+
                 cpu.IsRunnung = true;
                 var t = new System.Threading.Thread(new System.Threading.ThreadStart(delegate
                 {
@@ -81,34 +81,46 @@ namespace Emulator
         private void updateGui()
         {
             if (listBoxReg0.Items.Count != 2)
-                listBoxReg0.Items.Add(cpu.Register[0][0] + " " + cpu.Register[0][1]);
+                listBoxReg0.Items.Add(Cpu.ToBinaryString(cpu.Register[0]));
+            //listBoxReg0.Items.Add(cpu.Register[0][0] + " " + cpu.Register[0][1]);
             else
-                listBoxReg0.Items[1] = cpu.Register[0][0] + " " + cpu.Register[0][1];
+                listBoxReg0.Items[1] = Cpu.ToBinaryString(cpu.Register[0]);
+            //listBoxReg0.Items[1] = cpu.Register[0][0] + " " + cpu.Register[0][1];
 
             if (listBoxReg1.Items.Count != 2)
-                listBoxReg1.Items.Add(cpu.Register[1][0] + " " + cpu.Register[1][1]);
+                listBoxReg1.Items.Add(Cpu.ToBinaryString(cpu.Register[1]));
+                //listBoxReg1.Items.Add(cpu.Register[1][0] + " " + cpu.Register[1][1]);
             else
-                listBoxReg1.Items[1] = cpu.Register[1][0] + " " + cpu.Register[1][1];
+                listBoxReg1.Items[1] = Cpu.ToBinaryString(cpu.Register[1]);
+            //listBoxReg1.Items[1] = cpu.Register[1][0] + " " + cpu.Register[1][1];
 
             if (listBoxReg2.Items.Count != 2)
-                listBoxReg2.Items.Add(cpu.Register[2][0] + " " + cpu.Register[2][1]);
+                listBoxReg2.Items.Add(Cpu.ToBinaryString(cpu.Register[2]));
+            //listBoxReg2.Items.Add(cpu.Register[2][0] + " " + cpu.Register[2][1]);
             else
-                listBoxReg2.Items[1] = cpu.Register[2][0] + " " + cpu.Register[2][1];
+                listBoxReg2.Items[1] = Cpu.ToBinaryString(cpu.Register[2]);
+            //listBoxReg2.Items[1] = cpu.Register[2][0] + " " + cpu.Register[2][1];
 
             if (listBoxReg3.Items.Count != 2)
-                listBoxReg3.Items.Add(cpu.Register[3][0] + " " + cpu.Register[3][1]);
+                listBoxReg3.Items.Add(Cpu.ToBinaryString(cpu.Register[3]));
+            //listBoxReg3.Items.Add(cpu.Register[3][0] + " " + cpu.Register[3][1]);
             else
-                listBoxReg3.Items[1] = cpu.Register[3][0] + " " + cpu.Register[3][1];
+                listBoxReg3.Items[1] = Cpu.ToBinaryString(cpu.Register[3]);
+            //listBoxReg3.Items[1] = cpu.Register[3][0] + " " + cpu.Register[3][1];
 
             if (listBoxRegCommand.Items.Count != 2)
-                listBoxRegCommand.Items.Add(cpu.CommandRegister[0] + " " + cpu.CommandRegister[1]);
+                listBoxRegCommand.Items.Add(Cpu.ToBinaryString(cpu.CommandRegister));
+            //listBoxRegCommand.Items.Add(cpu.CommandRegister[0] + " " + cpu.CommandRegister[1]);
             else
-                listBoxRegCommand.Items[1] = cpu.CommandRegister[0] + " " + cpu.CommandRegister[1];
+                listBoxRegCommand.Items[1] = Cpu.ToBinaryString(cpu.CommandRegister);
+            //listBoxRegCommand.Items[1] = cpu.CommandRegister[0] + " " + cpu.CommandRegister[1];
 
             if (listBoxCommandCounter.Items.Count != 2)
-                listBoxCommandCounter.Items.Add(cpu.CommandCounter[0] + " " + cpu.CommandCounter[1]);
+                listBoxCommandCounter.Items.Add(Cpu.ToBinaryString(cpu.CommandCounter));
+                //listBoxCommandCounter.Items.Add(cpu.CommandCounter[0] + " " + cpu.CommandCounter[1]);
             else
-                listBoxCommandCounter.Items[1] = cpu.CommandCounter[0] + " " + cpu.CommandCounter[1];
+                listBoxCommandCounter.Items[1] = Cpu.ToBinaryString(cpu.CommandCounter);
+            //listBoxCommandCounter.Items[1] = cpu.CommandCounter[0] + " " + cpu.CommandCounter[1];
 
             checkBoxCarry.Enabled = cpu.CarryFlag;
 
@@ -116,14 +128,17 @@ namespace Emulator
             var cc = Cpu.ToShort(cpu.CommandCounter);
             for (var i = (cc - 5 * Cpu.WORD_LENGTH); i <= (cc + 10 * Cpu.WORD_LENGTH); i += Cpu.WORD_LENGTH)
             {
-                listBoxCommandStack.Items.Add(i + ":\t" + cpu.FromMemory(i, 1)[0] + " " + cpu.FromMemory(i + 1, 1)[0]);
+                listBoxCommandStack.Items.Add(i + ":\t" + Cpu.ToBinaryString(cpu.FromMemory(i, 2)));
+                //listBoxCommandStack.Items.Add(i + ":\t" + cpu.FromMemory(i, 1)[0] + " " + cpu.FromMemory(i + 1, 1)[0]);
             }
             listBoxCommandStack.SelectedIndex = 5;
 
             listBoxMemoryStack.Items.Clear();
             for (var i = 500; i <= 529; i += Cpu.WORD_LENGTH)
             {
-                listBoxMemoryStack.Items.Add(i + ":\t" + cpu.FromMemory(i, 1)[0] + " " + cpu.FromMemory(i + 1, 1)[0]);
+
+                listBoxMemoryStack.Items.Add(i + ":\t" + Cpu.ToBinaryString(cpu.FromMemory(i, 2)));
+                //listBoxMemoryStack.Items.Add(i + ":\t" + cpu.FromMemory(i, 1)[0] + " " + cpu.FromMemory(i + 1, 1)[0]);
             }
 
             toolStripStatusLabel1.Text = "Schritte: " + cpu.StepCounter;
