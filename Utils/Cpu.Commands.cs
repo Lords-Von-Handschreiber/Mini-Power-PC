@@ -305,5 +305,16 @@ namespace Utils
         {
             return new[] { (byte)(number >> 8), (byte)(number & 255) };
         }
+
+        /// <summary>
+        /// To the binary string.
+        /// </summary>
+        /// <param name="bytes">The bytes.</param>
+        /// <returns></returns>
+        public static string ToBinaryString(byte[] bytes)
+        {
+            //var s = ToShort(bytes);
+            return string.Format("{0,8}-{1,8}", Convert.ToString((short)(bytes[0] << 0), 2), Convert.ToString((short)(bytes[1] << 0), 2)).Replace(' ', '0').Replace('-', ' ');
+        }
     }
 }
