@@ -34,17 +34,21 @@ namespace Emulator
 
             activeMode = slowToolStripMenuItem;
             StepMode = (StepModeEnum)Enum.Parse(typeof(StepModeEnum), activeMode.Text);
+
 #if DEBUG
             args = new string[1];
             args[0] = @"C:\Users\peacemaker\Desktop\Mini-Power-PC.lvhe";
             args[0] = @"C:\Users\Thomas\Dropbox\ZHAW\LVH\Informatik\Semester-3\Aufgaben\Mini Power PC\Addition.lvhe";
 #endif
+
             // Falls ein File als Parameter mit angegeben wurde, den Emulator damit starten
             if (args.Length > 0)
             {
                 FileTracker.ActiveFile = new FileInfo(args[0]);
                 initGui();
             }
+            toolStripStatusLabel2.Text = string.Empty;
+
             updateGui();
         }
 
@@ -144,12 +148,13 @@ namespace Emulator
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
-        private void startToolStripMenuItem_Click(object sender, EventArgs e)
+        private void startStopToolStripMenuItem_Click(object sender, EventArgs e)
         {
             cpu.IsRunnung = !cpu.IsRunnung;
 
             if (cpu.IsRunnung)
             {
+                toolStripStatusLabel2.Text = string.Empty;
                 var t = new System.Threading.Thread(new System.Threading.ThreadStart(run));
                 t.Start();
             }
