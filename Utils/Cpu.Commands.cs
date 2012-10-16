@@ -114,6 +114,7 @@ namespace Utils
             switch (cmd)
             {
                 case Cmds.END:
+                    countUp = false;
                     IsRunnung = false;
                     break;
                 case Cmds.CLR:
@@ -229,7 +230,8 @@ namespace Utils
 
             if (countUp)
                 CommandCounter = AddBytes(CommandCounter, FromShort(2));
-            StepCounter++;
+            if (IsRunnung)
+                StepCounter++;
         }
 
         public void Fetch()
