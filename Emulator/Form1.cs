@@ -180,10 +180,14 @@ namespace Emulator
                         updateGui(); // runs on UI thread
                     });
 
-                if (StepMode != StepModeEnum.Fast)
-                    System.Threading.Thread.Sleep(25);
+                if (StepMode == StepModeEnum.Slow)
+                    System.Threading.Thread.Sleep(100);
+                else if (StepMode == StepModeEnum.Step)
+                    if (MessageBox.Show("Proceed to the next step?", "Next step?", MessageBoxButtons.YesNo) != System.Windows.Forms.DialogResult.Yes)
+                        break;
             }
             sq.Stop();
+            cpu.IsRunnung = false;
 
             toolStripStatusLabel2.Text = "Elapsed time: " + sq.Elapsed.ToString();
 
