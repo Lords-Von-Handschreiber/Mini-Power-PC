@@ -38,7 +38,7 @@ namespace Emulator
 #if DEBUG
             args = new string[1];
             args[0] = @"C:\Users\peacemaker\Desktop\Mini-Power-PC.lvhe";
-            args[0] = @"C:\Users\Thomas\Dropbox\ZHAW\LVH\Informatik\Semester-3\Aufgaben\Mini Power PC\Addition.lvhe";
+            args[0] = @"C:\Users\Thomas\Dropbox\ZHAW\LVH\Informatik\Semester-3\Aufgaben\Mini Power PC\Summenbildung.lvhe";
 #endif
 
             // Falls ein File als Parameter mit angegeben wurde, den Emulator damit starten
@@ -85,7 +85,7 @@ namespace Emulator
             textBoxReg3.Text = Cpu.ToBinaryString(cpu.Register[3]);
             textBoxRegCommand.Text = Cpu.ToBinaryString(cpu.CommandRegister);
             textBoxCommandCounter.Text = Cpu.ToBinaryString(cpu.CommandCounter);
-            checkBoxCarry.Enabled = cpu.CarryFlag;
+            checkBoxCarry.Checked = cpu.CarryFlag;
 
             listBoxCommandStack.Items.Clear();
             var cc = Cpu.ToShort(cpu.CommandCounter);
