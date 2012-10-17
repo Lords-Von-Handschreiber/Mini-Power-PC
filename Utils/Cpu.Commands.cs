@@ -59,7 +59,7 @@ namespace Utils
                 return Cmds.OR;
 
             // 65408 = 11111111 10000000
-            if ((currentCommand & 65280) == (short)Cmds.NOT)
+            if ((currentCommand & 65408) == (short)Cmds.NOT)
                 return Cmds.NOT;
 
             // 65280 = 11111111 00000000
@@ -77,23 +77,23 @@ namespace Utils
                 return Cmds.SLL;
 
             // 62208 = 11110011 00000000
-            if ((currentCommand & 65280) == (short)Cmds.BZ)
+            if ((currentCommand & 62208) == (short)Cmds.BZ)
                 return Cmds.BZ;
-            if ((currentCommand & 65280) == (short)Cmds.BNZ)
+            if ((currentCommand & 62208) == (short)Cmds.BNZ)
                 return Cmds.BNZ;
-            if ((currentCommand & 65280) == (short)Cmds.BC)
+            if ((currentCommand & 62208) == (short)Cmds.BC)
                 return Cmds.BC;
-            if ((currentCommand & 65280) == (short)Cmds.B)
+            if ((currentCommand & 62208) == (short)Cmds.B)
                 return Cmds.B;
 
             // 63488 = 11111000 00000000
-            if ((currentCommand & 65280) == (short)Cmds.BZD)
+            if ((currentCommand & 63488) == (short)Cmds.BZD)
                 return Cmds.BZD;
-            if ((currentCommand & 65280) == (short)Cmds.BNZD)
+            if ((currentCommand & 63488) == (short)Cmds.BNZD)
                 return Cmds.BNZD;
-            if ((currentCommand & 65280) == (short)Cmds.BCD)
+            if ((currentCommand & 63488) == (short)Cmds.BCD)
                 return Cmds.BCD;
-            if ((currentCommand & 65280) == (short)Cmds.BD)
+            if ((currentCommand & 63488) == (short)Cmds.BD)
                 return Cmds.BD;
 
             //57344 = 11100000 00000000
@@ -102,7 +102,8 @@ namespace Utils
             if ((currentCommand & 57344) == (short)Cmds.LWDD)
                 return Cmds.LWDD;
 
-            return Cmds.UNDEFINED;
+            throw new Exception("Command not found for: " + currentCommand);
+            //return Cmds.UNDEFINED;
         }
 
         /// <summary>
@@ -152,18 +153,14 @@ namespace Utils
                 case Cmds.SWDD:
                     ToMemory(Register[findRegNr()], (short)(ToShort(CommandRegister) & 1023));
                     break;
-                case Cmds.SRA:
-                    //TODO: correct shift right arithmetic
+                case Cmds.SRA: // TODO: CHECK
                     var origSra = Register[0];
                     CarryFlag = LSb(origSra);
-                    Register[0] = FromShort((short)(((ToShort(origSra) >> 1)) | (ToShort(origSra) & 192))); //192 = 11000000
+                    Register[0] = protectMsb(MSb(Register[0]), FromShort((short)((ToShort(Register[0]) >> 1))));
                     break;
-                case Cmds.SLA:
-                    //TODO: correct shift left arithmetic
-                    var origSla = Register[0];
-                    var origSlaMSb = MSb(origSla);
-                    CarryFlag = MSb(FromShort((short)(ToShort(origSla) >> 1)));
-                    Register[0] = FromShort((short)((ToShort(Register[0]) << 1)));
+                case Cmds.SLA:// TODO: CHECK
+                    CarryFlag = (ToShort(Register[0]) & (1 << 14)) == (1 << 14); // 0100000000000000
+                    Register[0] = protectMsb(MSb(Register[0]), FromShort((short)(ToShort(Register[0]) << 1)));
                     break;
                 case Cmds.SRL:
                     CarryFlag = LSb(Register[0]);
@@ -180,7 +177,7 @@ namespace Utils
                     Register[0] = FromShort((short)(ToShort(Register[0]) | ToShort(Register[findRegNr()])));
                     break;
                 case Cmds.NOT:
-                    Register[0] = FromShort((short)(~ToShort(Register[0]) - 1));
+                    Register[0] = FromShort((short)(~ToShort(Register[0])));
                     break;
                 case Cmds.BZ:
                     if (Register[0] == new byte[2] { 0, 0 })
@@ -235,7 +232,7 @@ namespace Utils
             }
 
             if (countUp)
-                CommandCounter = AddBytes(CommandCounter, FromShort(2));
+                CommandCounter = FromShort((short)(ToShort(CommandCounter) + 2));
             if (IsRunnung)
                 StepCounter++;
         }
@@ -255,7 +252,7 @@ namespace Utils
         /// <returns></returns>
         public static bool MSb(byte[] b)
         {
-            return ((b[0] >> 7) & 1) == 1;
+            return (b[0] & (1 << 7)) == (1 << 7);
         }
 
         /// <summary>
@@ -277,8 +274,32 @@ namespace Utils
         public byte[] AddBytes(byte[] b1, byte[] b2)
         {
             var s = ToShort(b1) + ToShort(b2);
-            CarryFlag = s < 0;
-            return FromShort((short)s);
+            short res;
+            byte[] retVal = new byte[2];
+            CarryFlag = !short.TryParse(s.ToString(), out res);
+            if (CarryFlag) // überlauf...
+            {
+                var i = new[] { (byte)(s >> 8), (byte)(s & 255) };
+                //if (((s >> 31) & 1) == 1) // negative zahl
+                //    i[0] = (byte)(i[0] | (1 << 7));
+                //else
+                //    i[0] = (byte)(i[0] & ~(1 << 7)); //~ == invers
+                retVal = protectMsb((((s >> 31) & 1) == 1), i);
+            }
+            else
+            {
+                retVal = FromShort(res);
+            }
+            return retVal;
+        }
+
+        private byte[] protectMsb(bool set, byte[] n)
+        {
+            if (set) // negative zahl
+                n[0] = (byte)(n[0] | (1 << 7));
+            else
+                n[0] = (byte)(n[0] & ~(1 << 7)); //~ == invers
+            return n;
         }
 
         /// <summary>
