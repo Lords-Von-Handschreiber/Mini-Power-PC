@@ -137,7 +137,7 @@ namespace Utils
                     regNr = findRegNr();
                     Register[0] = AddBytes(Register[0], Register[regNr]); // FromShort((short)(ToShort(Register[0]) + ToShort(Register[regNr])));
                     break;
-                case Cmds.ADDD:
+                case Cmds.ADDD: // TODO: 15-bit umrechnen in 16-bit
                     Register[0] = AddBytes(Register[0], FromShort((short)(ToShort(CommandRegister) & 32767))); // 01111111 11111111
                     break;
                 case Cmds.INC:
@@ -167,12 +167,12 @@ namespace Utils
                 case Cmds.SRL:
                     CarryFlag = LSb(Register[0]);
                     //Register[0] = FromShort((short)(ToShort(Register[0]) >> 1));
-                    Register[0] = FromShort((ushort)(ToShort(Register[0]) >> 1));
+                    Register[0] = FromShort((short)((ushort)ToShort(Register[0]) >> 1));
                     break;
                 case Cmds.SLL:
                     CarryFlag = MSb(Register[0]);
                     //Register[0] = FromShort((short)(ToShort(Register[0]) << 1));
-                    Register[0] = FromShort((ushort)(ToShort(Register[0]) << 1));
+                    Register[0] = FromShort((short)((ushort)ToShort(Register[0]) << 1));
                     break;
                 case Cmds.AND:
                     Register[0] = FromShort((short)(ToShort(Register[0]) & ToShort(Register[findRegNr()])));
@@ -284,10 +284,6 @@ namespace Utils
             if (CarryFlag) // überlauf...
             {
                 var i = new[] { (byte)(s >> 8), (byte)(s & 255) };
-                //if (((s >> 31) & 1) == 1) // negative zahl
-                //    i[0] = (byte)(i[0] | (1 << 7));
-                //else
-                //    i[0] = (byte)(i[0] & ~(1 << 7)); //~ == invers
                 retVal = protectMsb((((s >> 31) & 1) == 1), i);
             }
             else
@@ -314,11 +310,6 @@ namespace Utils
         public static short ToShort(byte[] bytes)
         {
             return (short)((bytes[0] << 8) | (bytes[1] << 0));
-        }
-
-        public static byte[] FromShort(ushort number)
-        {
-            return new[] { (byte)((number / 2 - 1) >> 8), (byte)((number / 2 - 1) & 255) };
         }
 
         /// <summary>
