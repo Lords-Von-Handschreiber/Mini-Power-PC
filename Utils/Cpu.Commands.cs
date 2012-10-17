@@ -156,19 +156,23 @@ namespace Utils
                 case Cmds.SRA: // TODO: CHECK
                     var origSra = Register[0];
                     CarryFlag = LSb(origSra);
-                    Register[0] = protectMsb(MSb(Register[0]), FromShort((short)((ToShort(Register[0]) >> 1))));
+                    //Register[0] = protectMsb(MSb(Register[0]), FromShort((short)((ToShort(Register[0]) >> 1))));
+                    Register[0] = FromShort((short)((ToShort(Register[0]) >> 1)));
                     break;
                 case Cmds.SLA:// TODO: CHECK
                     CarryFlag = (ToShort(Register[0]) & (1 << 14)) == (1 << 14); // 0100000000000000
-                    Register[0] = protectMsb(MSb(Register[0]), FromShort((short)(ToShort(Register[0]) << 1)));
+                    //Register[0] = protectMsb(MSb(Register[0]), FromShort((short)(ToShort(Register[0]) << 1)));
+                    Register[0] = FromShort((short)(ToShort(Register[0]) << 1));
                     break;
                 case Cmds.SRL:
                     CarryFlag = LSb(Register[0]);
-                    Register[0] = FromShort((short)(ToShort(Register[0]) >> 1));
+                    //Register[0] = FromShort((short)(ToShort(Register[0]) >> 1));
+                    Register[0] = FromShort((ushort)(ToShort(Register[0]) >> 1));
                     break;
                 case Cmds.SLL:
                     CarryFlag = MSb(Register[0]);
-                    Register[0] = FromShort((short)(ToShort(Register[0]) << 1));
+                    //Register[0] = FromShort((short)(ToShort(Register[0]) << 1));
+                    Register[0] = FromShort((ushort)(ToShort(Register[0]) << 1));
                     break;
                 case Cmds.AND:
                     Register[0] = FromShort((short)(ToShort(Register[0]) & ToShort(Register[findRegNr()])));
@@ -310,6 +314,11 @@ namespace Utils
         public static short ToShort(byte[] bytes)
         {
             return (short)((bytes[0] << 8) | (bytes[1] << 0));
+        }
+
+        public static byte[] FromShort(ushort number)
+        {
+            return new[] { (byte)((number / 2 - 1) >> 8), (byte)((number / 2 - 1) & 255) };
         }
 
         /// <summary>
