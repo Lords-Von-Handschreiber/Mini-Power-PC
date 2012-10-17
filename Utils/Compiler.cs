@@ -31,7 +31,7 @@ namespace Utils
                 {
                     foreach (var line in parameter.Trim().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
                     {
-                        w.Write(short.Parse(line));
+                        w.Write(Cpu.FromShort(short.Parse(line)));
                     }
                 }
             }

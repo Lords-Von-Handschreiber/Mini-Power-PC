@@ -119,10 +119,9 @@ namespace Utils
         /// </summary>
         public void Execute()
         {
-            Cmds cmd = find();
             short regNr = 0;
             bool countUp = true;
-            switch (cmd)
+            switch (find())
             {
                 case Cmds.END:
                     countUp = false;
@@ -130,25 +129,21 @@ namespace Utils
                     break;
                 case Cmds.CLR:
                     regNr = findRegNr();
-                    Register[regNr][0] = 0;
-                    Register[regNr][1] = 0;
+                    Register[regNr] = new byte[2];
                     CarryFlag = false;
                     break;
                 case Cmds.ADD:
                     regNr = findRegNr();
                     Register[0] = AddBytes(Register[0], Register[regNr]); // FromShort((short)(ToShort(Register[0]) + ToShort(Register[regNr])));
-                    // TODO: carryflag korrekt setzen
-                    CarryFlag = false;
                     break;
                 case Cmds.ADDD:
-                    //mask = 32767 (01111111 11111111)
-                    Register[0] = AddBytes(Register[0], FromShort((short)(ToShort(CommandRegister) ^ 32767)));
+                    Register[0] = AddBytes(Register[0], FromShort((short)(ToShort(CommandRegister) & 32767))); // 01111111 11111111
                     break;
                 case Cmds.INC:
                     Register[0] = AddBytes(Register[0], FromShort(1));
                     break;
                 case Cmds.DEC:
-                    Register[0] = AddBytes(Register[0], FromShort(-1));
+                    Register[0] = AddBytes(Register[0], FromShort(short.MinValue + 1));
                     break;
                 case Cmds.LWDD:
                     //mask = 1023 (00000011 11111111)
@@ -216,26 +211,26 @@ namespace Utils
                     if (Register[0] == new byte[2] { 0, 0 })
                     {
                         countUp = false;
-                        CommandCounter = FromShort((short)(ToShort(CommandRegister) & 1023));
+                        CommandCounter = FromShort((short)(ToShort(CommandRegister) & 1023)); // 00000011 11111111
                     }
                     break;
                 case Cmds.BNZD:
                     if (Register[0] != new byte[2] { 0, 0 })
                     {
                         countUp = false;
-                        CommandCounter = FromShort((short)(ToShort(CommandRegister) & 1023));
+                        CommandCounter = FromShort((short)(ToShort(CommandRegister) & 1023));// 00000011 11111111
                     }
                     break;
                 case Cmds.BCD:
                     if (CarryFlag)
                     {
                         countUp = false;
-                        CommandCounter = FromShort((short)(ToShort(CommandRegister) & 1023));
+                        CommandCounter = FromShort((short)(ToShort(CommandRegister) & 1023));// 00000011 11111111
                     }
                     break;
                 case Cmds.BD:
                     countUp = false;
-                    CommandCounter = FromShort((short)(ToShort(CommandRegister) & 1023));
+                    CommandCounter = FromShort((short)(ToShort(CommandRegister) & 1023));// 00000011 11111111
                     break;
             }
 
@@ -282,7 +277,7 @@ namespace Utils
         public byte[] AddBytes(byte[] b1, byte[] b2)
         {
             var s = ToShort(b1) + ToShort(b2);
-            CarryFlag = s > short.MaxValue;
+            CarryFlag = s < 0;
             return FromShort((short)s);
         }
 
