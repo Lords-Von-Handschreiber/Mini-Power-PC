@@ -105,6 +105,7 @@
             // checkBoxCarry
             // 
             this.checkBoxCarry.AutoSize = true;
+            this.checkBoxCarry.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.checkBoxCarry.Enabled = false;
             this.checkBoxCarry.Location = new System.Drawing.Point(207, 273);
             this.checkBoxCarry.Name = "checkBoxCarry";
