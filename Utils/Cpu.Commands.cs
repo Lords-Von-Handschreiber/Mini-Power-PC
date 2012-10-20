@@ -124,11 +124,11 @@ namespace Utils
             bool countUp = true;
             switch (find())
             {
-                case Cmds.END:
+                case Cmds.END: //checked by tbx
                     countUp = false;
                     IsRunnung = false;
                     break;
-                case Cmds.CLR:
+                case Cmds.CLR: //checked by tbx
                     regNr = findRegNr();
                     Register[regNr] = new byte[2];
                     CarryFlag = false;
@@ -137,7 +137,7 @@ namespace Utils
                     regNr = findRegNr();
                     Register[0] = AddBytes(Register[0], Register[regNr]); // FromShort((short)(ToShort(Register[0]) + ToShort(Register[regNr])));
                     break;
-                case Cmds.ADDD: // TODO: 15-bit umrechnen in 16-bit
+                case Cmds.ADDD:
                     Register[0] = AddBytes(Register[0], FromShort((short)(ToShort(CommandRegister) & 32767))); // 01111111 11111111
                     break;
                 case Cmds.INC:
@@ -153,13 +153,13 @@ namespace Utils
                 case Cmds.SWDD:
                     ToMemory(Register[findRegNr()], (short)(ToShort(CommandRegister) & 1023));
                     break;
-                case Cmds.SRA: // TODO: CHECK
+                case Cmds.SRA:
                     var origSra = Register[0];
                     CarryFlag = LSb(origSra);
                     //Register[0] = protectMsb(MSb(Register[0]), FromShort((short)((ToShort(Register[0]) >> 1))));
                     Register[0] = FromShort((short)((ToShort(Register[0]) >> 1)));
                     break;
-                case Cmds.SLA:// TODO: CHECK
+                case Cmds.SLA:
                     CarryFlag = (ToShort(Register[0]) & (1 << 14)) == (1 << 14); // 0100000000000000
                     //Register[0] = protectMsb(MSb(Register[0]), FromShort((short)(ToShort(Register[0]) << 1)));
                     Register[0] = FromShort((short)(ToShort(Register[0]) << 1));
