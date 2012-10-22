@@ -133,24 +133,27 @@ namespace Utils
                     Register[regNr] = new byte[2];
                     CarryFlag = false;
                     break;
-                case Cmds.ADD:
+                case Cmds.ADD: //checked by tbx - MUST BE RECHECKED PLEASE!!!!!
+                    /* Ich bin mir nicht sicher was als resultat angegeben werden soll, falls ein überlauf statt gefunden hat?
+                     * im moment zeige ich das resultat an, wie es gewesen wöre (einfach auf 16 bit gekürzt)
+                     */
                     regNr = findRegNr();
                     Register[0] = AddBytes(Register[0], Register[regNr]); // FromShort((short)(ToShort(Register[0]) + ToShort(Register[regNr])));
                     break;
-                case Cmds.ADDD:
+                case Cmds.ADDD: //MUST BE RECHECKED PLEASE!!!!!
                     Register[0] = AddBytes(Register[0], FromShort((short)(ToShort(CommandRegister) & 32767))); // 01111111 11111111
                     break;
-                case Cmds.INC:
+                case Cmds.INC: //MUST BE RECHECKED PLEASE!!!!!
                     Register[0] = AddBytes(Register[0], FromShort(1));
                     break;
-                case Cmds.DEC:
+                case Cmds.DEC: //MUST BE RECHECKED PLEASE!!!!!
                     Register[0] = AddBytes(Register[0], FromShort(short.MinValue + 1));
                     break;
-                case Cmds.LWDD:
+                case Cmds.LWDD: //checked by tbx
                     //mask = 1023 (00000011 11111111)
                     Register[findRegNr()] = FromMemory((short)(ToShort(CommandRegister) & 1023), WORD_LENGTH);
                     break;
-                case Cmds.SWDD:
+                case Cmds.SWDD: //checked by tbx
                     ToMemory(Register[findRegNr()], (short)(ToShort(CommandRegister) & 1023));
                     break;
                 case Cmds.SRA:
@@ -180,56 +183,56 @@ namespace Utils
                 case Cmds.OR:
                     Register[0] = FromShort((short)(ToShort(Register[0]) | ToShort(Register[findRegNr()])));
                     break;
-                case Cmds.NOT:
+                case Cmds.NOT: //checked by tbx
                     Register[0] = FromShort((short)(~ToShort(Register[0])));
                     break;
-                case Cmds.BZ:
-                    if (Register[0] == new byte[2] { 0, 0 })
+                case Cmds.BZ: //checked by tbx
+                    if (Register[0][0] == 0 && Register[0][1] == 0)
                     {
                         countUp = false;
                         CommandCounter = Register[findRegNr()];
                     }
                     break;
-                case Cmds.BNZ:
-                    if (Register[0] != new byte[2] { 0, 0 })
+                case Cmds.BNZ: //checked by tbx
+                    if (Register[0][0] != 0 || Register[0][1] != 0)
                     {
                         countUp = false;
                         CommandCounter = Register[findRegNr()];
                     }
                     break;
-                case Cmds.BC:
+                case Cmds.BC: //checked by tbx
                     if (CarryFlag)
                     {
                         countUp = false;
                         CommandCounter = Register[findRegNr()];
                     }
                     break;
-                case Cmds.B:
+                case Cmds.B: //checked by tbx
                     countUp = false;
                     CommandCounter = Register[findRegNr()];
                     break;
-                case Cmds.BZD:
-                    if (Register[0] == new byte[2] { 0, 0 })
+                case Cmds.BZD: //checked by tbx
+                    if (Register[0][0] == 0 && Register[0][1] == 0)
                     {
                         countUp = false;
                         CommandCounter = FromShort((short)(ToShort(CommandRegister) & 1023)); // 00000011 11111111
                     }
                     break;
-                case Cmds.BNZD:
-                    if (Register[0] != new byte[2] { 0, 0 })
+                case Cmds.BNZD: //checked by tbx
+                    if (Register[0][0] != 0 || Register[0][1] != 0)
                     {
                         countUp = false;
                         CommandCounter = FromShort((short)(ToShort(CommandRegister) & 1023));// 00000011 11111111
                     }
                     break;
-                case Cmds.BCD:
+                case Cmds.BCD: //checked by tbx
                     if (CarryFlag)
                     {
                         countUp = false;
                         CommandCounter = FromShort((short)(ToShort(CommandRegister) & 1023));// 00000011 11111111
                     }
                     break;
-                case Cmds.BD:
+                case Cmds.BD: //checked by tbx
                     countUp = false;
                     CommandCounter = FromShort((short)(ToShort(CommandRegister) & 1023));// 00000011 11111111
                     break;
@@ -275,16 +278,19 @@ namespace Utils
         /// <param name="b1">The b1.</param>
         /// <param name="b2">The b2.</param>
         /// <returns></returns>
-        public byte[] AddBytes(byte[] b1, byte[] b2)
+        private byte[] AddBytes(byte[] b1, byte[] b2)
         {
-            var s = ToShort(b1) + ToShort(b2);
+            short n1 = ToShort(b1);
+            short n2 = ToShort(b2);
+            var ires = n1 + n2;
             short res;
             byte[] retVal = new byte[2];
-            CarryFlag = !short.TryParse(s.ToString(), out res);
+            CarryFlag = !short.TryParse(ires.ToString(), out res);
             if (CarryFlag) // überlauf...
             {
-                var i = new[] { (byte)(s >> 8), (byte)(s & 255) };
-                retVal = protectMsb((((s >> 31) & 1) == 1), i);
+                var i = new[] { (byte)(ires >> 8), (byte)(ires & 255) };
+                //retVal = protectMsb((((ires >> 31) & 1) == 1), i);
+                retVal = i;
             }
             else
             {
