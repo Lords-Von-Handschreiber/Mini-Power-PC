@@ -142,10 +142,7 @@ namespace Compiler
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void compileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (FileTracker.ActiveCompileFile != null)
-                Utils.Compiler.Compile(richTextBox.Text, richTextBox1.Text, FileTracker.ActiveCompileFile);
-            else
-                saveCompiledFileDialog.ShowDialog();
+            Utils.Compiler.Compile(richTextBox.Text, richTextBox1.Text, FileTracker.ActiveCompileFile);
         }
 
         /// <summary>
@@ -155,19 +152,8 @@ namespace Compiler
         /// <param name="e">The <see cref="CancelEventArgs" /> instance containing the event data.</param>
         private void saveCombiledFileDialog_FileOk(object sender, CancelEventArgs e)
         {
-            FileTracker.ActiveCompileFile = new FileInfo(saveCompiledFileDialog.FileName);
             FileTracker.SaveFile(getFileContentString());
             Utils.Compiler.Compile(richTextBox.Text, richTextBox1.Text, FileTracker.ActiveCompileFile);
-        }
-
-        /// <summary>
-        /// Handles the Click event of the compileAsToolStripMenuItem control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
-        private void compileAsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            saveCompiledFileDialog.ShowDialog();
         }
 
         /// <summary>

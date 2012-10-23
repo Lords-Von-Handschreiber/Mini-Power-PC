@@ -37,12 +37,10 @@
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.compileAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutMiniPowerPCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.saveCompiledFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.richTextBox = new System.Windows.Forms.RichTextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -118,8 +116,7 @@
             // buildToolStripMenuItem
             // 
             this.buildToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.compileToolStripMenuItem,
-            this.compileAsToolStripMenuItem});
+            this.compileToolStripMenuItem});
             this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
             this.buildToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.buildToolStripMenuItem.Text = "&Build";
@@ -131,15 +128,6 @@
             this.compileToolStripMenuItem.Size = new System.Drawing.Size(252, 24);
             this.compileToolStripMenuItem.Text = "&Compile";
             this.compileToolStripMenuItem.Click += new System.EventHandler(this.compileToolStripMenuItem_Click);
-            // 
-            // compileAsToolStripMenuItem
-            // 
-            this.compileAsToolStripMenuItem.Name = "compileAsToolStripMenuItem";
-            this.compileAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.B)));
-            this.compileAsToolStripMenuItem.Size = new System.Drawing.Size(252, 24);
-            this.compileAsToolStripMenuItem.Text = "Compile as...";
-            this.compileAsToolStripMenuItem.Click += new System.EventHandler(this.compileAsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -164,11 +152,6 @@
             // 
             this.saveFileDialog.Filter = "Mnemonic Source (*.lvhc)|*.lvhc";
             this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
-            // 
-            // saveCompiledFileDialog
-            // 
-            this.saveCompiledFileDialog.Filter = "Executable (*.lvhe)|*.lvhe";
-            this.saveCompiledFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveCombiledFileDialog_FileOk);
             // 
             // richTextBox
             // 
@@ -248,9 +231,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.ToolStripMenuItem saveasToolStripMenuItem;
-        private System.Windows.Forms.SaveFileDialog saveCompiledFileDialog;
         private System.Windows.Forms.RichTextBox richTextBox;
-        private System.Windows.Forms.ToolStripMenuItem compileAsToolStripMenuItem;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutMiniPowerPCToolStripMenuItem;
