@@ -38,7 +38,7 @@ namespace Emulator
 #if DEBUG
             args = new string[1];
             args[0] = @"C:\Users\peacemaker\Desktop\Mini-Power-PC.lvhe";
-            args[0] = @"C:\Users\Thomas\Dropbox\ZHAW\LVH\Informatik\Semester-3\Aufgaben\Mini Power PC\Success.lvhe";
+            args[0] = @"C:\Users\Thomas\Dropbox\ZHAW\LVH\Informatik\Semester-3\Aufgaben\Mini Power PC\Multiplikation.lvhe";
 #endif
 
             // Falls ein File als Parameter mit angegeben wurde, den Emulator damit starten
@@ -63,13 +63,13 @@ namespace Emulator
                 cpu.ToMemory(br.ReadBytes((int)FileTracker.ActiveFile.Length), 100);
             }
 
-            FileTracker.ActiveCompileFile = new FileInfo(FileTracker.ActiveFile.FullName + ".param");
+            var paramsFile = new FileInfo(FileTracker.ActiveCompileFile.FullName + ".param");
             // Falls Parameter mitangegeben wurden, den Speicher ab #500 damit befüllen
-            if (FileTracker.ActiveCompileFile.Exists)
+            if (paramsFile.Exists)
             {
-                using (var br = new BinaryReader(FileTracker.ActiveCompileFile.OpenRead()))
+                using (var br = new BinaryReader(paramsFile.OpenRead()))
                 {
-                    cpu.ToMemory(br.ReadBytes((int)FileTracker.ActiveCompileFile.Length), 500);
+                    cpu.ToMemory(br.ReadBytes((int)paramsFile.Length), 500);
                 }
             }
         }
@@ -144,10 +144,10 @@ namespace Emulator
                         updateGui(); // runs on UI thread
                     });
 
-                if (StepMode == StepModeEnum.Slow)
+                if (cpu.IsRunnung && StepMode == StepModeEnum.Slow)
                     System.Threading.Thread.Sleep(100);
-                else if (StepMode == StepModeEnum.Step)
-                    if (MessageBox.Show("Proceed to the next step?", "Next step?", MessageBoxButtons.YesNo) != System.Windows.Forms.DialogResult.Yes)
+                else if (cpu.IsRunnung && StepMode == StepModeEnum.Step)
+                    if (MessageBox.Show("Proceed to the next step?", "Next step?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) != System.Windows.Forms.DialogResult.Yes)
                         break;
             }
             sq.Stop();
