@@ -11,7 +11,13 @@ namespace Utils
     {
         public static bool IsSaved { get; set; }
         public static FileInfo ActiveFile { get; set; }
-        public static FileInfo ActiveCompileFile { get; set; }
+        public static FileInfo ActiveCompileFile
+        {
+            get
+            {
+                return new FileInfo(ActiveFile.FullName.Replace(ActiveFile.Extension, ".lvhe"));
+            }
+        }
 
         /// <summary>
         /// Initializes the static <see cref="FileTracker" /> class.
