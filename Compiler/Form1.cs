@@ -92,7 +92,7 @@ namespace Compiler
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
         {
             FileTracker.ActiveFile = new FileInfo(saveFileDialog.FileName);
-            FileTracker.SaveFile(richTextBox.Text.Trim() + Environment.NewLine + PARAM_SEPERATOR + Environment.NewLine + richTextBox1.Text.Trim());
+            FileTracker.SaveFile(getFileContentString());
             updateFormText();
         }
 
@@ -103,7 +103,7 @@ namespace Compiler
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileTracker.SaveFile(richTextBox.Text.Trim() + Environment.NewLine + PARAM_SEPERATOR + Environment.NewLine + richTextBox1.Text.Trim());
+            FileTracker.SaveFile(getFileContentString());
             updateFormText();
             saveToolStripMenuItem.Enabled = false;
         }
@@ -156,7 +156,7 @@ namespace Compiler
         private void saveCombiledFileDialog_FileOk(object sender, CancelEventArgs e)
         {
             FileTracker.ActiveCompileFile = new FileInfo(saveCompiledFileDialog.FileName);
-            FileTracker.SaveFile(richTextBox.Text.Trim() + Environment.NewLine + PARAM_SEPERATOR + Environment.NewLine + richTextBox1.Text.Trim());
+            FileTracker.SaveFile(getFileContentString());
             Utils.Compiler.Compile(richTextBox.Text, richTextBox1.Text, FileTracker.ActiveCompileFile);
         }
 
@@ -168,6 +168,15 @@ namespace Compiler
         private void compileAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveCompiledFileDialog.ShowDialog();
+        }
+
+        /// <summary>
+        /// Gets the file content string.
+        /// </summary>
+        /// <returns></returns>
+        private string getFileContentString()
+        {
+            return richTextBox.Text.Trim() + Environment.NewLine + PARAM_SEPERATOR + Environment.NewLine + richTextBox1.Text.Trim();
         }
     }
 }
