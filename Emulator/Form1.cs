@@ -104,7 +104,7 @@ namespace Emulator
                 //listBoxMemoryStack.Items.Add(i + ":\t" + cpu.FromMemory(i, 1)[0] + " " + cpu.FromMemory(i + 1, 1)[0]);
             }
 
-            toolStripStatusLabel1.Text = "Steps: " + cpu.StepCounter;
+            toolStripStatusLabel1.Text = "Steps: " + (cpu.StepCounter > 999 ? cpu.StepCounter.ToString("#,000") : cpu.StepCounter.ToString());
         }
 
         /// <summary>
