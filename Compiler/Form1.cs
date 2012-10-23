@@ -30,7 +30,7 @@ namespace Compiler
                 var content = FileTracker.OpenFile(FileTracker.ActiveFile).Split(PARAM_SEPERATOR.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 richTextBox.Text = content[0];
                 if (content.Length > 1)
-                    richTextBox1.Text = content[1];
+                    richTextBox1.Text = content[1].Trim();
                 FileTracker.IsSaved = true;
                 saveToolStripMenuItem.Enabled = false;
                 updateFormText();
@@ -92,7 +92,7 @@ namespace Compiler
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
         {
             FileTracker.ActiveFile = new FileInfo(saveFileDialog.FileName);
-            FileTracker.SaveFile(richTextBox.Text + PARAM_SEPERATOR + richTextBox1.Text);
+            FileTracker.SaveFile(richTextBox.Text.Trim() + Environment.NewLine + PARAM_SEPERATOR + Environment.NewLine + richTextBox1.Text.Trim());
             updateFormText();
         }
 
@@ -103,7 +103,7 @@ namespace Compiler
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileTracker.SaveFile(richTextBox.Text + PARAM_SEPERATOR + richTextBox1.Text);
+            FileTracker.SaveFile(richTextBox.Text.Trim() + Environment.NewLine + PARAM_SEPERATOR + Environment.NewLine + richTextBox1.Text.Trim());
             updateFormText();
             saveToolStripMenuItem.Enabled = false;
         }
@@ -156,7 +156,7 @@ namespace Compiler
         private void saveCombiledFileDialog_FileOk(object sender, CancelEventArgs e)
         {
             FileTracker.ActiveCompileFile = new FileInfo(saveCompiledFileDialog.FileName);
-            FileTracker.SaveFile(richTextBox.Text + PARAM_SEPERATOR + richTextBox1.Text);
+            FileTracker.SaveFile(richTextBox.Text.Trim() + Environment.NewLine + PARAM_SEPERATOR + Environment.NewLine + richTextBox1.Text.Trim());
             Utils.Compiler.Compile(richTextBox.Text, richTextBox1.Text, FileTracker.ActiveCompileFile);
         }
 
