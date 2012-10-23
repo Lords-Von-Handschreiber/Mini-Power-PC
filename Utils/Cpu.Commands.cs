@@ -157,8 +157,8 @@ namespace Utils
                     ToMemory(Register[findRegNr()], (short)(ToShort(CommandRegister) & 1023));
                     break;
                 case Cmds.SRA:
-                    var origSra = Register[0];
-                    CarryFlag = LSb(origSra);
+                    //var origSra = Register[0];
+                    CarryFlag = LSb(Register[0]);
                     //Register[0] = protectMsb(MSb(Register[0]), FromShort((short)((ToShort(Register[0]) >> 1))));
                     Register[0] = FromShort((short)((ToShort(Register[0]) >> 1)));
                     break;
@@ -177,13 +177,13 @@ namespace Utils
                     //Register[0] = FromShort((short)(ToShort(Register[0]) << 1));
                     Register[0] = FromShort((short)((ushort)ToShort(Register[0]) << 1));
                     break;
-                case Cmds.AND:
+                case Cmds.AND: //checked by lse
                     Register[0] = FromShort((short)(ToShort(Register[0]) & ToShort(Register[findRegNr()])));
                     break;
-                case Cmds.OR:
+                case Cmds.OR: //checked by lse
                     Register[0] = FromShort((short)(ToShort(Register[0]) | ToShort(Register[findRegNr()])));
                     break;
-                case Cmds.NOT: //checked by tbx
+                case Cmds.NOT: //checked by tbx, lse
                     Register[0] = FromShort((short)(~ToShort(Register[0])));
                     break;
                 case Cmds.BZ: //checked by tbx
