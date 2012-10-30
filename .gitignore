@@ -11,5 +11,5 @@
 _ReSharper.*
 *.resharper
 Ankh.NoLoad
-.lvhe
-.lvhe.*
+*.lvhe
+*.lvhe.*
