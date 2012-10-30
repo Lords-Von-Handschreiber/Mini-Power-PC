@@ -156,23 +156,23 @@ namespace Utils
                 case Cmds.SWDD: //checked by tbx
                     ToMemory(Register[findRegNr()], (short)(ToShort(CommandRegister) & 1023));
                     break;
-                case Cmds.SRA:
-                    //var origSra = Register[0];
+                case Cmds.SRA: //checked by tbx
                     CarryFlag = LSb(Register[0]);
-                    //Register[0] = protectMsb(MSb(Register[0]), FromShort((short)((ToShort(Register[0]) >> 1))));
-                    Register[0] = FromShort((short)((ToShort(Register[0]) >> 1)));
+                    // only shift 15 bit
+                    Register[0] = protectMsb(MSb(Register[0]), FromShort((short)((ToShort(Register[0]) >> 1))));
+                    //Register[0] = FromShort((short)((ToShort(Register[0]) >> 1)));
                     break;
-                case Cmds.SLA:
-                    CarryFlag = (ToShort(Register[0]) & (1 << 14)) == (1 << 14); // 0100000000000000
-                    //Register[0] = protectMsb(MSb(Register[0]), FromShort((short)(ToShort(Register[0]) << 1)));
-                    Register[0] = FromShort((short)(ToShort(Register[0]) << 1));
+                case Cmds.SLA: //checked by tbx
+                    CarryFlag = (ToShort(Register[0]) & (1 << 14)) == (1 << 14); // 0100000000000000 (16384)
+                    Register[0] = protectMsb(MSb(Register[0]), FromShort((short)(ToShort(Register[0]) << 1)));
+                    //Register[0] = FromShort((short)(ToShort(Register[0]) << 1));
                     break;
-                case Cmds.SRL:
+                case Cmds.SRL: //checked by tbx
                     CarryFlag = LSb(Register[0]);
                     //Register[0] = FromShort((short)(ToShort(Register[0]) >> 1));
                     Register[0] = FromShort((short)((ushort)ToShort(Register[0]) >> 1));
                     break;
-                case Cmds.SLL:
+                case Cmds.SLL: //checked by tbx
                     CarryFlag = MSb(Register[0]);
                     //Register[0] = FromShort((short)(ToShort(Register[0]) << 1));
                     Register[0] = FromShort((short)((ushort)ToShort(Register[0]) << 1));
