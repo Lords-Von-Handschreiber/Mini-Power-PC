@@ -1,0 +1,6 @@
+LWDD 0, #500
+SRA
+SRA
+SWDD 0, #502
+~~params~~
+-14
