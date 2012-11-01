@@ -40,13 +40,13 @@ ADDD  #1
 SWDD 0 ,#510 
 CLR 0  
 BD  #114 
-LWDD 0 ,#508 
-ADDD  #1 
-SWDD 0 ,#508 
-CLR 0  
+LWDD 0 ,#508
+ADDD  #1
+SWDD 0 ,#508
+CLR 0
 BD  #116
 ~~params~~
-2
+4
 32767
 0
 0
