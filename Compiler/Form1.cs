@@ -142,6 +142,10 @@ namespace Compiler
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void compileToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox.Text = richTextBox.Text.Replace("\t", " ").Trim();
+            FileTracker.SaveFile(getFileContentString());
+            updateFormText();
+            saveToolStripMenuItem.Enabled = false;
             Utils.Compiler.Compile(richTextBox.Text, richTextBox1.Text, FileTracker.ActiveCompileFile);
         }
 

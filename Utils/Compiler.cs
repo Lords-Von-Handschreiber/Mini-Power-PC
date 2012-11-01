@@ -53,9 +53,9 @@ namespace Utils
                     }
                     else
                     {
-                        var l = line.Trim().Split(' ');
+                        var l = line.Trim().Replace("\t", " ").Split(' ');
                         var cmdString = l[0].Trim();
-                        var args = line.Replace(cmdString, "").Replace(" ", "").Trim(); ;
+                        var args = line.Replace(cmdString, "").Replace("\t", " ").Replace(" ", "").Trim(); ;
 
                         var cmd = Cpu.FromShort((short)Enum.Parse(typeof(Cpu.Cmds), cmdString));
                         if (!string.IsNullOrEmpty(args))
