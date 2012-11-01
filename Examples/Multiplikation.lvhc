@@ -4,7 +4,7 @@ CLR 3
 SWDD 3 ,#502 
 LWDD 0 ,#500 
 SLL   
-BCD  #164 
+BCD  #168 
 CLR 0  
 LWDD 0 ,#500 
 SRA   
@@ -15,14 +15,16 @@ CLR 0
 LWDD 0 ,#510 
 SLL   
 SWDD 0 ,#510 
-BCD  #184 
+BCD  #188 
 BD  #116 
 CLR 0  
+LWDD 0 ,#506 
+BZD  #198 
 LWDD 0 ,#506 
 LWDD 1 ,#510 
 ADD 1  
 SWDD 0 ,#506 
-BCD  #152 
+BCD  #156 
 BD  #122 
 LWDD 0 ,#504 
 ADDD  #1 
@@ -40,11 +42,17 @@ ADDD  #1
 SWDD 0 ,#510 
 CLR 0  
 BD  #114 
-LWDD 0 ,#508
-ADDD  #1
-SWDD 0 ,#508
-CLR 0
-BD  #116
+LWDD 0 ,#508 
+ADDD  #1 
+SWDD 0 ,#508 
+CLR 0  
+BD  #116 
+LWDD 0 ,#504 
+BZD  #204 
+BD  #144 
+LWDD 0 ,#508 
+SWDD 0 ,#504 
+BD  #144
 ~~params~~
 4
 32767
