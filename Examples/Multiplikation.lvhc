@@ -1,47 +1,37 @@
-LWDD 3 ,#502 
-SWDD 3 ,#510 
-CLR 3  
-SWDD 3 ,#502 
+LWDD 0 ,#502 
+SWDD 0 ,#510 
 LWDD 0 ,#500 
 SLL   
-BCD  #188 
-BD  #204 
-CLR 0  
+BCD  #168 
+BD  #184 
 LWDD 0 ,#500 
 SRL   
 SWDD 0 ,#500 
-BCD  #146 
-BZD  #256 
-CLR 0  
+BCD  #138 
+BZD  #230 
 LWDD 0 ,#510 
 SLL   
 SWDD 0 ,#510 
-BCD  #232 
+BCD  #208 
 LWDD 0 ,#508 
 SLA   
 SWDD 0 ,#508 
-BD  #116 
-CLR 0  
-LWDD 0 ,#506 
-BZD  #244 
-LWDD 0 ,#506 
-LWDD 1 ,#510 
-ADD 1  
-SWDD 0 ,#506 
-BCD  #176 
+BD  #112 
 LWDD 0 ,#504 
 LWDD 1 ,#508 
 ADD 1  
 SWDD 0 ,#504 
-CLR 0  
-LWDD 0 ,#500 
-BD  #124 
+LWDD 0 ,#506 
+LWDD 1 ,#510 
+ADD 1  
+SWDD 0 ,#506 
+BCD  #158 
+BD  #118 
 LWDD 0 ,#504 
 ADDD  #1 
 SWDD 0 ,#504 
-CLR 0  
 LWDD 0 ,#500 
-BD  #162 
+BD  #120 
 LWDD 0 ,#500 
 NOT   
 ADDD  #1 
@@ -52,30 +42,27 @@ ADDD  #1
 SWDD 0 ,#510 
 LWDD 0 ,#510 
 SLL   
-BCD  #212 
-BD  #116 
+BCD  #192 
+BD  #112 
 LWDD 0 ,#510 
 NOT   
 ADDD  #1 
 SWDD 0 ,#510 
-CLR 0  
 NOT   
 SRL   
 SWDD 0 ,#520 
-CLR 0  
-BD  #116 
+BD  #112 
 LWDD 0 ,#508 
 SLA   
 ADDD  #1 
 SWDD 0 ,#508 
-CLR 0  
-BD  #116 
+BD  #112 
 LWDD 0 ,#504 
-BZD  #250 
-BD  #152 
+BZD  #224 
+BD  #146 
 LWDD 0 ,#508 
 SWDD 0 ,#504 
-BD  #152 
+BD  #146 
 LWDD 0 ,#520 
 BZD  #42 
 LWDD 0 ,#504 
@@ -85,15 +72,16 @@ LWDD 0 ,#506
 NOT   
 ADDD  #1 
 SWDD 0 ,#506 
-BCD  #278 
+BCD  #252 
 BD  #42 
 LWDD 0 ,#504 
 ADDD  #1 
 SWDD 0 ,#504 
 BD  #42
 ~~params~~
--222
--333
+-1234
+4321
+0
 0
 0
 0

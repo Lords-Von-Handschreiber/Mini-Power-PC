@@ -339,9 +339,7 @@
             // 
             // slowToolStripMenuItem
             // 
-            this.slowToolStripMenuItem.Checked = true;
             this.slowToolStripMenuItem.CheckOnClick = true;
-            this.slowToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.slowToolStripMenuItem.Name = "slowToolStripMenuItem";
             this.slowToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1)));
             this.slowToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
@@ -359,7 +357,9 @@
             // 
             // fastToolStripMenuItem
             // 
+            this.fastToolStripMenuItem.Checked = true;
             this.fastToolStripMenuItem.CheckOnClick = true;
+            this.fastToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.fastToolStripMenuItem.Name = "fastToolStripMenuItem";
             this.fastToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3)));
             this.fastToolStripMenuItem.Size = new System.Drawing.Size(160, 24);

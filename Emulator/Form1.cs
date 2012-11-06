@@ -32,13 +32,12 @@ namespace Emulator
             cpu.CommandCounter = Cpu.FromShort(100);
             cpu.StepCounter = 0;
 
-            activeMode = slowToolStripMenuItem;
+            activeMode = fastToolStripMenuItem;
             StepMode = (StepModeEnum)Enum.Parse(typeof(StepModeEnum), activeMode.Text);
 
 #if DEBUG
             args = new string[1];
-            args[0] = @"C:\Users\peacemaker\Desktop\Mini-Power-PC.lvhe";
-            args[0] = @"C:\Users\Thomas\Dropbox\ZHAW\LVH\Informatik\Semester-3\Aufgaben\Mini Power PC\Multiplikation.lvhe";
+            args[0] = @"C:\Dev\ASP.Net\Mini-Power-PC\Examples\Multiplikation.lvhe";
 #endif
 
             // Falls ein File als Parameter mit angegeben wurde, den Emulator damit starten
