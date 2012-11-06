@@ -1,5 +1,6 @@
 ﻿﻿using System;
 using System.IO;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Utils;
@@ -83,6 +84,7 @@ namespace Emulator
             textBoxReg2.Text = Cpu.ToBinaryString(cpu.Register[2]);
             textBoxReg3.Text = Cpu.ToBinaryString(cpu.Register[3]);
             textBoxRegCommand.Text = Cpu.ToBinaryString(cpu.CommandRegister);
+            lblCurrentCommand.Text = cpu.find().ToString();
             textBoxCommandCounter.Text = Cpu.ToBinaryString(cpu.CommandCounter);
             checkBoxCarry.Checked = cpu.CarryFlag;
 

@@ -40,7 +40,7 @@ namespace Utils
         /// Finds the command.
         /// </summary>
         /// <returns></returns>
-        private Cmds find()
+        public Cmds find()
         {
             var currentCommand = ToShort(CommandRegister);
             if (currentCommand == 0)
@@ -110,7 +110,7 @@ namespace Utils
         /// Finds the registry number.
         /// </summary>
         /// <returns></returns>
-        private short findRegNr()
+        public short findRegNr()
         {
             return (short)((ToShort(CommandRegister) & (3 << 10)) >> 10);
         }
@@ -295,7 +295,7 @@ namespace Utils
             {
                 var pos1 = n1 >= 0;
                 var pos2 = n2 >= 0;
-                var posRes = res >= 0;
+                var posRes = ires >= 0;
 
                 if ((pos1 && pos2 && !posRes) || (!pos1 && pos2 && posRes) || (!pos1 && !pos2 && posRes) || (pos1 && !pos2 && posRes))
                     CarryFlag = true;

@@ -59,6 +59,7 @@
             this.slowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stepToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fastToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblCurrentCommand = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -139,6 +140,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblCurrentCommand);
             this.panel1.Controls.Add(this.textBoxCommandCounter);
             this.panel1.Controls.Add(this.labelCommandCounter);
             this.panel1.Controls.Add(this.textBoxRegCommand);
@@ -366,6 +368,15 @@
             this.fastToolStripMenuItem.Text = "Fast";
             this.fastToolStripMenuItem.Click += new System.EventHandler(this.stepMode_Click);
             // 
+            // lblCurrentCommand
+            // 
+            this.lblCurrentCommand.AutoSize = true;
+            this.lblCurrentCommand.Location = new System.Drawing.Point(376, 225);
+            this.lblCurrentCommand.Name = "lblCurrentCommand";
+            this.lblCurrentCommand.Size = new System.Drawing.Size(46, 17);
+            this.lblCurrentCommand.TabIndex = 24;
+            this.lblCurrentCommand.Text = "label3";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -421,6 +432,7 @@
         private System.Windows.Forms.Label labelRegCommand;
         private System.Windows.Forms.TextBox textBoxCommandCounter;
         private System.Windows.Forms.Label labelCommandCounter;
+        private System.Windows.Forms.Label lblCurrentCommand;
 
     }
 }
