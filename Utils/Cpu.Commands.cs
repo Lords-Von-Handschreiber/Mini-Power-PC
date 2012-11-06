@@ -293,17 +293,11 @@ namespace Utils
             }
             else
             {
-                var neg1 = n1 < 0;
-                var neg2 = n2 < 0;
-                var posRes = res > 0;
+                var pos1 = n1 >= 0;
+                var pos2 = n2 >= 0;
+                var posRes = res >= 0;
 
-                if ((neg1 && neg2 && posRes)
-                    || (neg1 && !neg2 && posRes)
-                    || (!neg1 && neg2 && !posRes)
-                    || (neg1 && !neg2 && !posRes)
-                    || (!neg1 && !neg2 && posRes)
-                    || (neg1 && neg2 && !posRes)
-                    )
+                if ((pos1 && pos2 && !posRes) || (!pos1 && pos2 && posRes) || (!pos1 && !pos2 && posRes) || (pos1 && !pos2 && posRes))
                     CarryFlag = true;
 
                 retVal = FromShort(res);
