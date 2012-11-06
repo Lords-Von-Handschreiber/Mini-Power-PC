@@ -137,8 +137,7 @@ namespace Utils
                     /* Ich bin mir nicht sicher was als resultat angegeben werden soll, falls ein überlauf statt gefunden hat?
                      * im moment zeige ich das resultat an, wie es gewesen wöre (einfach auf 16 bit gekürzt)
                      */
-                    regNr = findRegNr();
-                    Register[0] = AddBytes(Register[0], Register[regNr]); // FromShort((short)(ToShort(Register[0]) + ToShort(Register[regNr])));
+                    Register[0] = AddBytes(Register[0], Register[findRegNr()]); // FromShort((short)(ToShort(Register[0]) + ToShort(Register[regNr])));
                     break;
                 case Cmds.ADDD: //MUST BE RECHECKED PLEASE!!!!!
                     Register[0] = AddBytes(Register[0], FromShort((short)(ToShort(CommandRegister) & 32767))); // 01111111 11111111

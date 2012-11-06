@@ -14,7 +14,7 @@ BCD  #146
 BZD  #270 
 CLR 0  
 LWDD 0 ,#510 
-SLA   
+SLL   
 SWDD 0 ,#510 
 BCD  #246 
 LWDD 0 ,#508 
@@ -40,15 +40,15 @@ LWDD 0 ,#504
 ADDD  #1 
 SWDD 0 ,#504 
 CLR 0  
-ADDD  #32767 
-SWDD 0 ,#514 
-LWDD 1 ,#514 
-LWDD 0 ,#506 
-AND 1  
-SWDD 0 ,#506 
-CLR 0  
+BD #198
+
+
+
+
+
+
 LWDD 0 ,#500 
-BD  #174 
+BD  #124 
 LWDD 0 ,#500 
 NOT   
 ADDD  #1 
@@ -99,8 +99,8 @@ ADDD  #1
 SWDD 0 ,#504 
 BD  #42
 ~~params~~
--1234
--4321
+1234
+4321
 0
 0
 0
